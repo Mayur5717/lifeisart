@@ -1,773 +1,985 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Life is Art — Events & Experiences</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MaCaBo — Make CHaOS BOotiful</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --teal: #1a9db5;
-  --teal-deep: #0d7a8e;
-  --teal-light: #5ec4d4;
-  --yellow: #f5d94e;
-  --yellow-warm: #f0c420;
-  --cream: #fdf8ef;
-  --dark: #0e1f24;
-  --text: #1c3840;
-  --wa: #25d366;
-  --wa-dark: #128c46;
-  --nav-h: 68px;
+/* ══ TOKENS ══ */
+:root{
+  --bg:#f8f2ee; --cream:#fdf9f6;
+  --teal:#4aada8; --teal2:#7dcbc7;
+  --orange:#f0832a; --yellow:#f5c842;
+  --pink:#e85c8a; --purple:#9b6bb5;
+  --green:#3aaa6e; --ink:#1a1208; --ink2:#5a4030;
+  --logo:linear-gradient(135deg,#4aada8 0%,#7dcbc7 18%,#f5c842 36%,#f0832a 54%,#e85c8a 72%,#9b6bb5 100%);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Poppins',sans-serif;color:var(--ink);overflow-x:hidden;cursor:none;}
 
-/* PROGRESS */
-#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--yellow),var(--teal-light));z-index:9999;transition:width .1s}
+/* ══ CURSOR ══ */
+#cur,#curt{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur{width:12px;height:12px;background:var(--logo);transition:width .15s,height .15s;}
+#curt{width:36px;height:36px;border:2px solid rgba(74,173,168,.5);z-index:9998;transition:width .2s,height .2s,border-color .2s;}
+#cur.big{width:22px;height:22px;}
+#curt.big{width:56px;height:56px;border-color:rgba(232,92,138,.5);}
+@media(hover:none){#cur,#curt{display:none;}body{cursor:auto;}}
 
-/* CURSOR */
-@media(pointer:fine){
-  .cur,.curR{position:fixed;pointer-events:none;z-index:9997;border-radius:50%;top:0;left:0}
-  .cur{width:10px;height:10px;background:var(--yellow);transform:translate(-50%,-50%);mix-blend-mode:difference;transition:transform .15s}
-  .curR{width:34px;height:34px;border:1.5px solid rgba(94,196,212,.7);transform:translate(-50%,-50%);transition:transform .08s}
-}
+/* ══ GRAIN ══ */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.038'/%3E%3C/svg%3E");pointer-events:none;z-index:9990;mix-blend-mode:multiply;}
 
-/* NAV */
-nav{position:fixed;inset:0 0 auto 0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 44px;background:rgba(253,248,239,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(26,157,181,.1);transition:box-shadow .3s}
-nav.up{box-shadow:0 4px 36px rgba(14,31,36,.1)}
-.nlogo{display:flex;align-items:center;gap:12px}
-.lmark{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-deep));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 16px rgba(26,157,181,.35);flex-shrink:0}
-.lwords strong{display:block;font-family:'Playfair Display',serif;font-size:16px;color:var(--dark)}
-.lwords span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
-.ndesk{display:flex;align-items:center;gap:32px}
-.ndesk a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);position:relative;transition:color .25s}
-.ndesk a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--teal);transition:width .3s}
-.ndesk a:hover{color:var(--teal)}
-.ndesk a:hover::after{width:100%}
-.nwa{display:inline-flex;align-items:center;gap:7px;background:var(--wa);color:#fff;padding:10px 20px;border-radius:40px;font-size:12.5px;font-weight:600;box-shadow:0 4px 16px rgba(37,211,102,.35);transition:transform .2s,box-shadow .2s}
-.nwa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.5)}
-.nwa::after{display:none!important}
-.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
-.ham span{display:block;width:24px;height:2px;background:var(--dark);border-radius:2px;transition:.3s}
-.ham.o span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.ham.o span:nth-child(2){opacity:0}
-.ham.o span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mmenu{display:none;position:fixed;inset:var(--nav-h) 0 0 0;z-index:999;background:rgba(253,248,239,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:opacity .3s}
-.mmenu.o{display:flex;opacity:1;pointer-events:all}
-.mmenu a{font-family:'Playfair Display',serif;font-size:30px;color:var(--dark);transition:color .2s}
-.mmenu a:hover{color:var(--teal)}
-.mm-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:16px 36px;border-radius:50px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 22px rgba(37,211,102,.4);margin-top:8px}
+/* ══ KEYFRAMES ══ */
+@keyframes gs{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+@keyframes rotS{to{transform:rotate(360deg);}}
+@keyframes rotR{to{transform:rotate(-360deg);}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-12px) rotate(4deg);}}
+@keyframes bob2{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeL{from{opacity:0;transform:translateX(-32px);}to{opacity:1;transform:translateX(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.75) rotate(8deg);}to{opacity:1;transform:scale(1) rotate(0);}}
+@keyframes marquee{to{transform:translateX(-50%);}}
+@keyframes pulseRing{0%,100%{box-shadow:0 0 0 0 rgba(240,131,42,.4);}50%{box-shadow:0 0 0 10px rgba(240,131,42,0);}}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+@keyframes paintIn{from{clip-path:inset(0 100% 0 0);}to{clip-path:inset(0 0% 0 0);}}
+@keyframes inkDrop{0%{transform:scale(0) rotate(0deg);opacity:1;}100%{transform:scale(1) rotate(30deg);opacity:.8;}}
+@keyframes splatPop{0%{transform:scale(0);opacity:0;}70%{transform:scale(1.2);opacity:1;}100%{transform:scale(1);opacity:1;}}
+@keyframes countUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glowBlob{0%,100%{filter:blur(0px) brightness(1);}50%{filter:blur(2px) brightness(1.08);}}
 
-/* HERO */
-.hero{min-height:100svh;padding:calc(var(--nav-h)+44px) 44px 56px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;position:relative;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-.o1{width:480px;height:480px;background:var(--teal-light);opacity:.17;top:-15%;right:-4%;animation:drift 10s ease-in-out infinite}
-.o2{width:320px;height:320px;background:var(--yellow);opacity:.13;bottom:-5%;left:-8%;animation:drift 14s ease-in-out infinite reverse}
-@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-28px)}}
-.hbadge{display:inline-flex;align-items:center;gap:7px;background:rgba(26,157,181,.1);border:1px solid rgba(26,157,181,.25);border-radius:40px;padding:7px 18px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:26px;animation:up .8s both}
-.htitle{font-family:'Playfair Display',serif;font-size:clamp(42px,5.5vw,80px);font-weight:900;line-height:1;color:var(--dark);margin-bottom:22px;animation:up .8s .1s both}
-.htitle em{font-style:italic;color:var(--teal);position:relative;display:inline-block}
-.htitle em::after{content:'';position:absolute;bottom:3px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow),var(--teal-light));border-radius:2px}
-.hsub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,20px);font-weight:300;font-style:italic;color:#5a7a82;line-height:1.75;max-width:430px;margin-bottom:38px;animation:up .8s .2s both}
-.hbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;animation:up .8s .3s both}
-.bteal{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;padding:15px 34px;border-radius:50px;font-size:13.5px;font-weight:500;letter-spacing:.05em;box-shadow:0 8px 26px rgba(26,157,181,.4);transition:transform .25s,box-shadow .25s;border:none;cursor:pointer}
-.bteal:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(26,157,181,.5)}
-.bwa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;padding:15px 30px;border-radius:50px;font-size:13.5px;font-weight:700;box-shadow:0 8px 26px rgba(37,211,102,.35);transition:transform .25s,box-shadow .25s;border:none;cursor:pointer}
-.bwa:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(37,211,102,.5)}
-.hstats{display:flex;gap:36px;flex-wrap:wrap;margin-top:48px;animation:up .8s .4s both}
-.snum{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--teal);line-height:1}
-.slbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:#8aa5ac;margin-top:5px}
-/* hero cards */
-.hvisual{position:relative;display:flex;justify-content:center;align-items:center;animation:right 1s .2s both}
-.hcards{position:relative;width:370px;height:460px}
-.hc{position:absolute;border-radius:22px;overflow:hidden;box-shadow:0 28px 66px rgba(14,31,36,.2)}
-.hcm{width:290px;height:360px;top:0;left:50%;transform:translateX(-50%);z-index:3;background:linear-gradient(160deg,#0d4f5c,#1a9db5)}
-.hc2{width:230px;height:300px;bottom:0;right:0;background:linear-gradient(160deg,#2c5364,#34e89e);z-index:2;transform:rotate(7deg)}
-.hc3{width:210px;height:280px;bottom:20px;left:0;background:linear-gradient(160deg,#6b2a0d,#e88c30);z-index:1;transform:rotate(-8deg)}
-.hci{padding:26px;height:100%;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
-.htag{display:inline-block;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border-radius:20px;padding:4px 12px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;width:fit-content}
-.hemi{font-size:58px;text-align:center;filter:drop-shadow(0 6px 14px rgba(0,0,0,.3))}
-.hcname{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:4px}
-.hcdate{font-size:11px;opacity:.8}
-.hfloat{position:absolute;background:#fff;border-radius:14px;box-shadow:0 12px 36px rgba(14,31,36,.14);padding:11px 16px;z-index:10}
-.hf1{top:28px;left:-22px;display:flex;align-items:center;gap:9px;animation:fy 4s ease-in-out infinite}
-.hf2{bottom:66px;right:-26px;text-align:center;animation:fy 4s 2s ease-in-out infinite}
-@keyframes fy{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.fbig{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--teal)}
+/* ══ NAV ══ */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5vw;position:fixed;top:0;left:0;right:0;z-index:500;transition:all .35s;}
+nav.scrolled{background:rgba(248,242,238,.95);backdrop-filter:blur(16px);box-shadow:0 2px 28px rgba(240,131,42,.1);padding:.72rem 5vw;}
+.logo-wrap{display:flex;align-items:center;gap:.55rem;text-decoration:none;}
+.logo-dot{width:90px;height:90px;border-radius:50%;background:var(--logo);background-size:200%;animation:gs 5s ease infinite;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;font-weight:900;color:#fff;box-shadow:0 4px 14px rgba(240,131,42,.28);transition:transform .3s;}
+.logo-front{height: 90px;width:90px;animation:gs 5s ease infinite;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+.logo-wrap:hover .logo-dot{transform:rotate(-10deg) scale(1.1);}
+.logo-txt{font-family:'Playfair Display',serif;font-size:1.42rem;font-weight:900;letter-spacing:.05em;}
+.Ma{color:var(--teal);}.Ca{color:var(--orange);}.Bo{color:var(--pink);}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.78rem;font-weight:500;color:var(--ink2);letter-spacing:.06em;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--logo);border-radius:2px;transition:width .3s;}
+.nav-links a:hover{color:var(--orange);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--logo);background-size:200%;animation:gs 5s ease infinite;color:#fff!important;padding:.52rem 1.35rem;border-radius:40px;font-weight:600!important;box-shadow:0 4px 16px rgba(240,131,42,.3);transition:transform .2s,box-shadow .2s!important;}
+.nav-cta:hover{transform:translateY(-2px)!important;box-shadow:0 10px 28px rgba(240,131,42,.45)!important;}
+.nav-cta::after{display:none!important;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:none;padding:4px;background:none;border:none;}
+.ham span{display:block;width:23px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mob{display:none;position:fixed;inset:0;background:rgba(248,242,238,.97);backdrop-filter:blur(20px);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;transform:translateY(-10px);transition:opacity .3s,transform .3s;}
+.mob.open{display:flex;opacity:1;transform:none;}
+.mob a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;text-decoration:none;color:var(--ink);transition:color .2s,transform .2s;}
+.mob a:hover{color:var(--teal);transform:translateX(8px);}
+.mob .mob-cta{background:var(--logo);color:#fff;padding:.9rem 2.2rem;border-radius:40px;font-family:'Poppins',sans-serif;font-size:1rem!important;font-weight:600;box-shadow:0 6px 22px rgba(240,131,42,.35);}
 
-/* SECTION */
-.sw{padding:96px 44px}
-.seye{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
-.seye::before,.seye::after{content:'';height:1px;flex:1}
-.seye::before{background:linear-gradient(90deg,transparent,var(--teal-light))}
-.seye::after{background:linear-gradient(90deg,var(--teal-light),transparent)}
-.stitle{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:700;line-height:1.15;color:var(--dark);margin-bottom:14px}
-.stitle em{font-style:italic;color:var(--teal)}
-.ssub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,19px);color:#6b8a92;line-height:1.75}
+/* ══ MODAL ══ */
+/* Blur on ::before + pointer-events:none avoids iOS Safari tap issues on children when the full overlay uses backdrop-filter */
+.overlay{display:none;position:fixed;inset:0;z-index:10050;align-items:center;justify-content:center;padding:1rem;}
+.overlay.show{display:flex;}
+.overlay::before{content:'';position:absolute;inset:0;z-index:0;background:rgba(26,18,8,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:none;}
+.modal{background:var(--cream);border-radius:28px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;padding:2.2rem;position:relative;z-index:1;box-shadow:0 40px 100px rgba(0,0,0,.32);animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1);-webkit-tap-highlight-color:transparent;}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--logo);border-radius:28px 28px 0 0;}
+.mx{position:absolute;top:1rem;right:1rem;width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.08);cursor:none;font-size:.92rem;display:flex;align-items:center;justify-content:center;color:var(--ink2);transition:background .2s;}
+.mx:hover{background:rgba(0,0,0,.16);}
+.mbadge{display:inline-flex;align-items:center;gap:.4rem;background:var(--logo);background-size:200%;animation:gs 4s ease infinite;color:#fff;font-family:'Caveat',cursive;font-size:1rem;font-weight:600;padding:.32rem .95rem;border-radius:20px;margin-bottom:1rem;}
+.mtitle{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:1.3rem;}
+.fl{font-size:.71rem;font-weight:600;color:var(--ink2);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.3rem;}
+.fi{width:100%;padding:.76rem .95rem;border-radius:11px;border:1.5px solid rgba(0,0,0,.1);background:#fff;font-family:'Poppins',sans-serif;font-size:.86rem;color:var(--ink);margin-bottom:1rem;outline:none;transition:border-color .2s,box-shadow .2s;cursor:text;}
+.fi:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(74,173,168,.14);}
+select.fi{cursor:pointer;}
+textarea.fi{resize:none;height:70px;cursor:text;}
+.btn-wa{width:100%;padding:.95rem;border-radius:14px;border:none;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:'Poppins',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;box-shadow:0 6px 22px rgba(37,211,102,.28);transition:transform .25s,box-shadow .25s;touch-action:manipulation;}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,211,102,.42);}
+@media(hover:none){.btn-wa{cursor:none;}}
 
-/* REVEAL */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
-.rv.on{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
-@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-@keyframes right{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+/* ══ HERO ══ */
+.hero{min-height:100svh;display:flex;align-items:center;padding:5.5rem 5vw 3rem;position:relative;overflow:hidden;gap:2.5rem;}
 
-/* SCROLL STORY */
-.story{background:var(--dark);padding:96px 44px;text-align:center;position:relative;overflow:hidden}
-.story-bg{position:absolute;font-family:'Playfair Display',serif;font-size:clamp(80px,15vw,200px);font-weight:900;color:rgba(255,255,255,.025);pointer-events:none;white-space:nowrap;top:50%;left:50%;transform:translate(-50%,-50%);letter-spacing:.05em}
-.story .seye{color:var(--teal-light);justify-content:center}
-.story .stitle{color:#fff}
-.jsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
-.jstep{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:34px 26px;transition:transform .4s,background .4s;cursor:default}
-.jstep:hover{transform:translateY(-8px);background:rgba(26,157,181,.12);border-color:rgba(26,157,181,.3)}
-.jnum{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-deep));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin:0 auto 16px}
-.jtitle{font-family:'Playfair Display',serif;font-size:19px;color:#fff;margin-bottom:10px}
-.jdesc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
+/* ── CORNER DECORATIONS — matching reference image exactly, but in MaCaBo colors ── */
+.corner{position:absolute;pointer-events:none;z-index:1;}
+.c-tr{top:0;right:0;width:clamp(220px,32vw,400px);}
+.c-bl{bottom:0;left:0;width:clamp(200px,28vw,360px);}
+.c-br{bottom:0;right:0;width:clamp(180px,24vw,300px);}
 
-/* EVENTS */
-.evhead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:52px;flex-wrap:wrap}
-.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
-.pill{padding:8px 18px;border-radius:30px;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:.06em;border:1.5px solid rgba(26,157,181,.2);color:#6b8a92;background:transparent;transition:all .25s}
-.pill.on,.pill:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+/* Glow + float on corners */
+.c-tr svg{animation:glowBlob 4s ease-in-out infinite, bob2 7s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(74,173,168,.45)) drop-shadow(0 0 30px rgba(240,131,42,.3));}
+.c-bl svg{animation:glowBlob 3.5s 1s ease-in-out infinite, bob2 8s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(232,92,138,.45)) drop-shadow(0 0 26px rgba(245,200,66,.35));}
+.c-br svg{animation:glowBlob 4.5s .5s ease-in-out infinite, bob2 6.5s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(155,107,181,.4)) drop-shadow(0 0 24px rgba(240,131,42,.3));}
 
-/* EVENT CARD */
-.ec{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 4px 22px rgba(14,31,36,.07);transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s;display:flex;flex-direction:column}
-.ec:hover{transform:translateY(-10px);box-shadow:0 22px 60px rgba(14,31,36,.13)}
-.ec.feat{grid-column:span 2}
-.ecimg{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:80px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.ec.feat .ecimg{height:270px;font-size:110px}
-.ec:hover .ecimg{transform:scale(1.07)}
-.ecov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,31,36,.65) 0%,transparent 55%)}
-.eccat{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;padding:5px 13px;border-radius:18px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
-.ecdtag{position:absolute;top:12px;right:12px;background:var(--yellow);color:var(--dark);padding:5px 11px;border-radius:9px;font-size:10.5px;font-weight:700}
-.ecsp{position:absolute;bottom:12px;left:14px;color:#fff;font-size:11px;font-weight:500;display:flex;align-items:center;gap:5px}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:bl 1.4s ease-in-out infinite}
-@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
-.ecbody{padding:22px;flex:1;display:flex;flex-direction:column}
-.ectitle{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--dark);margin-bottom:7px;line-height:1.3}
-.ecdesc{font-size:13px;color:#8aa5ac;line-height:1.65;margin-bottom:16px;flex:1}
-.ecmeta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
-.ecmeta span{font-size:11.5px;color:#6b8a92}
-.ecfoot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(14,31,36,.07);gap:10px;flex-wrap:wrap}
-.ecprice{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--teal);white-space:nowrap}
-.ecprice span{font-size:12px;font-weight:400;color:#8aa5ac;font-family:'Inter',sans-serif}
-.ecacts{display:flex;gap:7px;flex-wrap:wrap}
+/* Parallax handled via JS */
 
-/* ★ WhatsApp direct booking button on each card */
-.bkwa{display:inline-flex;align-items:center;gap:6px;background:var(--wa);color:#fff;padding:10px 16px;border-radius:28px;font-size:12px;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(37,211,102,.3);transition:transform .2s,box-shadow .2s;white-space:nowrap}
-.bkwa:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,211,102,.45)}
-.bkdet{display:inline-flex;align-items:center;gap:5px;background:var(--dark);color:#fff;padding:10px 16px;border-radius:28px;font-size:12px;font-weight:500;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
-.bkdet:hover{background:var(--teal)}
+/* ── PAINTED brush splats behind hero (appear with paint animation) ── */
+.paint-canvas{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.psplat{position:absolute;border-radius:50%;opacity:0;animation:splatPop .7s cubic-bezier(.34,1.56,.64,1) forwards;}
+.pbr{position:absolute;border-radius:55% 45% 60% 40%/45% 60% 40% 55%;opacity:0;animation:paintIn 1.1s ease forwards;}
 
-/* PAST */
-.past{background:var(--dark);padding:96px 44px;position:relative;overflow:hidden}
-.past::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal-light),transparent)}
-.past .seye{color:var(--teal-light);justify-content:center}
-.past .stitle{color:#fff;text-align:center}
-.past .ssub{color:rgba(255,255,255,.4);text-align:center;max-width:500px;margin:0 auto}
-.pgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:14px;margin-top:52px}
-.pgrid>div:first-child{grid-column:span 2;grid-row:span 2}
-.pgrid>div:nth-child(5){grid-column:span 2}
-.pi{border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:48px;cursor:pointer;transition:transform .4s}
-.pi:first-child{font-size:72px}
-.pi:hover{transform:scale(1.04);z-index:2}
-.pov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,31,36,.82) 0%,transparent 60%);padding:16px;display:flex;flex-direction:column;justify-content:flex-end}
-.ptitle{font-family:'Playfair Display',serif;font-size:14px;color:#fff;margin-bottom:3px}
-.pdate{font-size:10.5px;color:var(--yellow);letter-spacing:.07em}
-.prat{font-size:10.5px;color:rgba(255,255,255,.6);margin-top:5px}
+/* ── HERO LEFT ── */
+.hero-left{flex:1;min-width:0;position:relative;z-index:5;}
+.hero-left>*{animation:fadeL .9s ease both;}
+.hw-tag{font-family:'Caveat',cursive;font-size:clamp(.95rem,1.8vw,1.3rem);color:var(--teal);font-weight:600;display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem;animation-delay:.1s;}
+.hw-tag::before{content:'';width:28px;height:2px;background:var(--teal);border-radius:2px;flex-shrink:0;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7.5vw,6.2rem);font-weight:900;line-height:1.0;margin-bottom:.5rem;animation-delay:.25s;}
+.hero h1 .star{display:inline-block;font-size:.42em;vertical-align:super;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:rotS 5s linear infinite;}
+.tagline{font-family:'Caveat',cursive;font-size:clamp(1.1rem,2.4vw,1.75rem);font-weight:700;letter-spacing:.07em;margin-bottom:1.1rem;animation-delay:.4s;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:clamp(.83rem,1.3vw,.95rem);line-height:1.88;color:var(--ink2);max-width:420px;margin-bottom:1.5rem;font-weight:300;animation-delay:.55s;}
+.pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.7rem;animation-delay:.7s;}
+.pill{font-family:'Caveat',cursive;font-size:.9rem;font-weight:600;padding:.33rem .88rem;border-radius:24px;border:2px solid;cursor:none;transition:transform .2s,box-shadow .2s;}
+.pill:hover{transform:translateY(-3px) rotate(-2deg);box-shadow:0 6px 16px rgba(0,0,0,.12);}
+.pt{color:var(--teal);border-color:var(--teal);background:rgba(74,173,168,.09);}
+.pp{color:var(--pink);border-color:var(--pink);background:rgba(232,92,138,.09);}
+.po{color:var(--orange);border-color:var(--orange);background:rgba(240,131,42,.09);}
+.py{color:#b8860b;border-color:var(--yellow);background:rgba(245,200,66,.1);}
+.pv{color:var(--purple);border-color:var(--purple);background:rgba(155,107,181,.09);}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;animation-delay:.85s;}
+.btn-main{background:var(--logo);background-size:200%;animation:gs 6s ease infinite;color:#fff;padding:.86rem 2rem;border-radius:40px;border:none;font-family:'Poppins',sans-serif;font-size:.86rem;font-weight:600;letter-spacing:.07em;cursor:none;text-decoration:none;box-shadow:0 8px 26px rgba(240,131,42,.3);transition:transform .25s,box-shadow .25s;display:inline-flex;align-items:center;gap:.45rem;}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(232,92,138,.38);}
+.btn-out{background:transparent;color:var(--teal);padding:.86rem 2rem;border-radius:40px;border:2px solid var(--teal);font-family:'Poppins',sans-serif;font-size:.86rem;font-weight:500;cursor:none;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:.45rem;}
+.btn-out:hover{background:var(--teal);color:#fff;transform:translateY(-3px);}
+.soc-row{display:flex;gap:.75rem;margin-top:1.4rem;animation-delay:1s;}
+.soc-a{width:36px;height:36px;border:1.5px solid rgba(0,0,0,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink2);text-decoration:none;font-size:.8rem;transition:all .22s;cursor:none;}
+.soc-a:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-3px);}
 
-/* STICKY NUDGE */
-.snudge{position:fixed;bottom:0;left:0;right:0;z-index:900;background:#fff;border-top:1px solid rgba(26,157,181,.12);box-shadow:0 -6px 36px rgba(14,31,36,.12);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;transform:translateY(100%);transition:transform .4s cubic-bezier(.23,1,.32,1)}
-.snudge.sh{transform:translateY(0)}
-.ntext{font-family:'Playfair Display',serif;font-size:14.5px;color:var(--dark);font-style:italic}
-.nsub{font-size:11px;color:#8aa5ac}
-.nacts{display:flex;gap:10px;align-items:center;flex-shrink:0}
-.nwabtn{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;padding:12px 22px;border-radius:28px;font-size:13px;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,.35);transition:transform .2s}
-.nwabtn:hover{transform:scale(1.04)}
-.ncls{background:none;border:none;cursor:pointer;font-size:22px;color:#aaa;padding:4px;flex-shrink:0;line-height:1}
+/* ── HERO RIGHT — the actual logo circle ── */
+.hero-right{flex:0 0 auto;position:relative;z-index:5;display:flex;align-items:center;justify-content:center;animation:scaleIn 1.2s .3s ease both;}
+.orb-wrap{position:relative;width:clamp(240px,30vw,400px);height:clamp(240px,30vw,400px);}
+/* Ink brush ring around circle like reference */
+.ink-ring{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);z-index:3;pointer-events:none;animation:rotS 50s linear infinite;filter:drop-shadow(0 0 10px rgba(240,131,42,.4)) drop-shadow(0 0 28px rgba(232,92,138,.25));}
+.orb{width:100%;height:100%;border-radius:50%;background:conic-gradient(from 0deg,#4aada8,#7dcbc7,#f5c842,#f0832a,#e85c8a,#9b6bb5,#4aada8);display:flex;align-items:center;justify-content:center;animation:rotS 20s linear infinite;box-shadow:0 0 60px rgba(240,131,42,.22),0 0 100px rgba(232,92,138,.14);}
+.orb-in{width:85%;height:85%;border-radius:50%;background:conic-gradient(from 180deg,#4aada8,#f5c842,#e85c8a,#9b6bb5,#4aada8);display:flex;align-items:center;justify-content:center;animation:rotR 20s linear infinite;text-align:center;}
+.orb-txt .t1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.2vw,3rem);font-weight:900;color:rgba(255,255,255,.95);display:block;line-height:1.1;animation:rotS 20s linear infinite;}
+.orb-txt .t2{font-family:'Caveat',cursive;font-size:clamp(.6rem,1vw,.82rem);color:rgba(255,255,255,.78);display:block;letter-spacing:.14em;animation:rotS 20s linear infinite;}
+/* Sunflower */
+.sflower{position:absolute;bottom:3%;right:-9%;width:clamp(58px,8vw,96px);height:clamp(58px,8vw,96px);animation:bob 3.5s ease-in-out infinite;z-index:10;}
+/* Float badges */
+.fbadge{position:absolute;background:#fff;border-radius:14px;padding:.45rem .9rem;box-shadow:0 6px 22px rgba(0,0,0,.1);font-family:'Caveat',cursive;font-size:.92rem;font-weight:600;white-space:nowrap;z-index:8;}
+.fb1{top:-6%;left:-12%;color:var(--teal);animation:bob 3.2s ease-in-out infinite;}
+.fb2{bottom:-1%;left:-14%;color:var(--pink);animation:bob2 3.8s ease-in-out infinite;}
+.fb3{top:10%;right:-16%;color:var(--orange);animation:bob 4.1s 1.1s ease-in-out infinite;}
 
-/* BOOKING */
-.bsec{padding:96px 44px;background:linear-gradient(145deg,#f0f8fa,var(--cream))}
-.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
-.bcard{background:#fff;border-radius:26px;padding:42px;box-shadow:0 18px 66px rgba(14,31,36,.1)}
-.bcard-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:26px}
-.bcard-title span{color:var(--teal);font-style:italic}
-.fg{margin-bottom:18px}
-.fl{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8aa5ac;margin-bottom:8px}
-.fi,.fs{width:100%;padding:13px 16px;border:1.5px solid rgba(14,31,36,.1);border-radius:12px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--dark);background:rgba(26,157,181,.02);transition:border .25s,box-shadow .25s;outline:none;appearance:none;-webkit-appearance:none}
-.fi:focus,.fs:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(26,157,181,.08)}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.warow{display:flex;align-items:center;gap:12px;background:#e9f9f0;border:1.5px solid var(--wa);border-radius:12px;padding:13px 16px;margin-bottom:18px;cursor:pointer;transition:background .2s}
-.warow:hover{background:#d4f2e3}
-.warow-ico{font-size:20px}
-.warow-t{font-size:12.5px;font-weight:700;color:var(--wa-dark)}
-.warow-s{font-size:11px;color:#5cac7e;margin-top:1px}
-.sbtn{width:100%;background:linear-gradient(135deg,var(--wa-dark),var(--wa));color:#fff;padding:16px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 26px rgba(37,211,102,.35);transition:transform .25s,box-shadow .25s}
-.sbtn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(37,211,102,.5)}
-.btitle{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--dark);margin-bottom:18px;line-height:1.2}
-.btitle em{font-style:italic;color:var(--teal)}
-.btext{font-family:'Cormorant Garamond',serif;font-size:18px;color:#6b8a92;line-height:1.8;margin-bottom:34px}
-.flist{display:flex;flex-direction:column;gap:16px}
-.fi-item{display:flex;align-items:flex-start;gap:14px}
-.fii{width:44px;height:44px;border-radius:12px;background:rgba(26,157,181,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:19px}
-.fi-item h4{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:3px}
-.fi-item p{font-size:12.5px;color:#8aa5ac;line-height:1.6}
+/* ══ MARQUEE ══ */
+.mq-wrap{background:var(--logo);background-size:300%;animation:gs 8s ease infinite;padding:.82rem 0;overflow:hidden;}
+.mq-track{display:flex;white-space:nowrap;animation:marquee 28s linear infinite;}
+.mq-item{display:inline-flex;align-items:center;gap:.65rem;font-family:'Caveat',cursive;font-size:1.1rem;font-weight:600;color:#fff;padding:0 1.4rem;}
+.mq-item::after{content:'✿';font-size:.85rem;opacity:.7;}
 
-/* TESTIMONIALS */
-.tsec{padding:96px 44px}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
-.tc{background:#fff;border-radius:20px;padding:30px;box-shadow:0 4px 22px rgba(14,31,36,.06);position:relative;transition:transform .4s,box-shadow .4s}
-.tc:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(14,31,36,.11)}
-.tc::before{content:'"';font-family:'Playfair Display',serif;font-size:68px;color:var(--teal);opacity:.12;position:absolute;top:10px;left:18px;line-height:1;pointer-events:none}
-.tstars{display:flex;gap:3px;margin-bottom:14px}
-.tstars span{color:var(--yellow-warm);font-size:14px}
-.ttext{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:#4a6268;line-height:1.7;margin-bottom:22px}
-.tauth{display:flex;align-items:center;gap:11px}
-.tav{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.tname{font-size:13px;font-weight:600;color:var(--dark)}
-.tev{font-size:11px;color:var(--teal);margin-top:2px}
+/* ══ SECTIONS ══ */
+section{padding:4.5rem 5vw;position:relative;overflow:hidden;}
+.s-cream{background:var(--cream);}
+.s-bg{background:var(--bg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;}
+.eyebrow::before{content:'✦';font-size:.8rem;}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;color:var(--ink);line-height:1.12;margin-bottom:.7rem;}
+.sec-h .acc{background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-p{font-size:clamp(.83rem,1.3vw,.92rem);color:var(--ink2);line-height:1.85;font-weight:300;max-width:500px;margin-bottom:2rem;}
 
-/* CTA */
-.cta{padding:96px 44px;text-align:center;background:linear-gradient(140deg,var(--teal-deep),#0d4f5c,var(--dark));position:relative;overflow:hidden}
-.cta::before{content:'✦';position:absolute;font-size:260px;opacity:.03;color:var(--yellow);top:-30px;left:-30px;line-height:1;pointer-events:none}
-.ctitle{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,66px);font-weight:700;color:#fff;margin-bottom:16px;line-height:1.15}
-.ctitle em{font-style:italic;color:var(--yellow)}
-.csub{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(255,255,255,.6);margin-bottom:42px;font-weight:300}
-.cbtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cbwa{display:inline-flex;align-items:center;gap:9px;background:var(--wa);color:#fff;padding:17px 40px;border-radius:50px;font-size:15px;font-weight:700;box-shadow:0 8px 30px rgba(37,211,102,.45);transition:transform .3s,box-shadow .3s}
-.cbwa:hover{transform:translateY(-3px);box-shadow:0 16px 46px rgba(37,211,102,.6)}
-.cbow{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.3);color:#fff;padding:17px 38px;border-radius:50px;font-size:15px;transition:all .3s}
-.cbow:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6)}
+/* ══ EVENT CARDS ══ */
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,295px),1fr));gap:1.35rem;}
+.ev-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07);transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;cursor:none;position:relative;display:flex;flex-direction:column;}
+.ev-card:hover{transform:translateY(-10px) rotate(.35deg);box-shadow:0 22px 55px rgba(0,0,0,.13);}
+.ev-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.22) 50%,transparent 62%);background-size:200%;opacity:0;transition:opacity .3s;}
+.ev-card:hover::after{opacity:1;animation:shimmer .8s ease forwards;}
+.ev-bar{height:6px;width:100%;}
+.ev-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
+.ev-chip{display:inline-flex;align-items:center;gap:.35rem;font-family:'Caveat',cursive;font-size:.9rem;font-weight:600;padding:.24rem .8rem;border-radius:18px;margin-bottom:.85rem;align-self:flex-start;}
+.ev-top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.42rem;}
+.ev-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);line-height:1.25;flex:1;}
+.hot{display:inline-block;font-family:'Caveat',cursive;font-size:.76rem;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;padding:.16rem .58rem;border-radius:10px;flex-shrink:0;animation:pulseRing 2.5s ease-in-out infinite;}
+.ev-date{font-size:.74rem;color:var(--ink2);font-weight:500;margin-bottom:.3rem;display:flex;align-items:center;gap:.35rem;}
+.ev-seats{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;font-size:.73rem;color:var(--ink2);}
+.sbar{flex:1;height:5px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden;}
+.sfill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.25,.46,.45,.94);}
+.ev-desc{font-size:.79rem;color:#7a6a5a;line-height:1.7;font-weight:300;margin-bottom:1.1rem;flex:1;}
+.btn-book{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.76rem;border-radius:13px;border:none;font-family:'Poppins',sans-serif;font-size:.79rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:transform .22s,box-shadow .22s,filter .2s;position:relative;z-index:1;overflow:hidden;}
+.btn-book:hover{transform:translateY(-2px);filter:brightness(1.07);}
+.btn-book::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;pointer-events:none;background:rgba(255,255,255,.18);transform:skewX(-20deg);transition:left .4s ease;}
+.btn-book:hover::before{left:150%;}
+/* per-event colors */
+.mic .ev-bar,.mic .sfill{background:linear-gradient(90deg,var(--teal),var(--teal2));}
+.mic .ev-chip{background:rgba(74,173,168,.12);color:var(--teal);}
+.mic .btn-book{background:linear-gradient(135deg,var(--teal),var(--teal2));box-shadow:0 5px 18px rgba(74,173,168,.35);}
+.cdy .ev-bar,.cdy .sfill{background:linear-gradient(90deg,var(--yellow),var(--orange));}
+.cdy .ev-chip{background:rgba(245,200,66,.13);color:#b8860b;}
+.cdy .btn-book{background:linear-gradient(135deg,var(--orange),var(--yellow));box-shadow:0 5px 18px rgba(240,131,42,.35);}
+.kara .ev-bar,.kara .sfill{background:linear-gradient(90deg,var(--pink),var(--purple));}
+.kara .ev-chip{background:rgba(232,92,138,.11);color:var(--pink);}
+.kara .btn-book{background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 5px 18px rgba(232,92,138,.35);}
+.bdte .ev-bar,.bdte .sfill{background:linear-gradient(90deg,var(--pink),var(--orange));}
+.bdte .ev-chip{background:rgba(232,92,138,.1);color:var(--pink);}
+.bdte .btn-book{background:linear-gradient(135deg,#e85c8a,#f0832a);box-shadow:0 5px 18px rgba(232,92,138,.32);}
+.mvie .ev-bar,.mvie .sfill{background:linear-gradient(90deg,var(--purple),var(--teal));}
+.mvie .ev-chip{background:rgba(155,107,181,.11);color:var(--purple);}
+.mvie .btn-book{background:linear-gradient(135deg,var(--purple),var(--teal));box-shadow:0 5px 18px rgba(155,107,181,.35);}
+.gmes .ev-bar,.gmes .sfill{background:linear-gradient(90deg,var(--green),var(--teal));}
+.gmes .ev-chip{background:rgba(58,170,110,.11);color:var(--green);}
+.gmes .btn-book{background:linear-gradient(135deg,var(--green),var(--teal));box-shadow:0 5px 18px rgba(58,170,110,.32);}
 
-/* WA FAB */
-.wafab{position:fixed;bottom:28px;right:22px;z-index:800;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 8px 28px rgba(37,211,102,.5);animation:pw 2.5s ease-in-out infinite;transition:transform .3s}
-.wafab:hover{transform:scale(1.12)}
-@keyframes pw{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 12px rgba(37,211,102,.1)}}
-.wafab-tip{position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--dark);color:#fff;padding:9px 13px;border-radius:9px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s}
-.wafab:hover .wafab-tip{opacity:1}
-.wafab-tip::after{content:'';position:absolute;left:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:var(--dark)}
+/* ══ STATS ══ */
+.stats{background:var(--ink);padding:4rem 5vw;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;position:relative;overflow:hidden;}
+.stats::before{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,rgba(74,173,168,.07) 0%,rgba(240,131,42,.07) 25%,rgba(232,92,138,.07) 50%,rgba(155,107,181,.07) 75%,rgba(74,173,168,.07) 100%);animation:rotS 25s linear infinite;}
+.stn{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1;margin-bottom:.35rem;position:relative;z-index:1;}
+.stl{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,248,245,.42);position:relative;z-index:1;}
 
-/* FOOTER */
-footer{background:var(--dark);padding:68px 44px 36px}
-.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.fbname{font-family:'Playfair Display',serif;font-size:19px;color:#fff;margin:14px 0 10px}
-.fbdesc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:22px}
-.fsocs{display:flex;gap:11px}
-.fsoc{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .3s}
-.fsoc:hover{background:var(--teal);border-color:var(--teal);transform:translateY(-2px)}
-.fcol h5{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#fff;margin-bottom:18px;font-weight:600}
-.flinks{display:flex;flex-direction:column;gap:10px}
-.flinks a{font-size:13px;color:rgba(255,255,255,.5);transition:color .25s}
-.flinks a:hover{color:var(--teal-light)}
-.fbot{padding-top:30px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:10px}
-.fbot a{color:var(--teal-light)}
+/* ══ CATEGORIES ══ */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,140px),1fr));gap:.9rem;}
+.cat-card{background:#fff;border-radius:20px;padding:1.5rem .7rem;text-align:center;cursor:none;position:relative;overflow:hidden;box-shadow:0 3px 16px rgba(0,0,0,.06);transition:all .35s cubic-bezier(.34,1.56,.64,1);}
+.cat-card:hover{transform:translateY(-8px) scale(1.04);}
+.cat-glow{position:absolute;inset:0;opacity:0;transition:opacity .35s;z-index:0;}
+.cat-card:hover .cat-glow{opacity:1;}
+.cat-ico{font-size:1.9rem;display:block;margin-bottom:.65rem;position:relative;z-index:1;transition:transform .35s;}
+.cat-card:hover .cat-ico{transform:scale(1.3) rotate(-8deg);}
+.cat-nm{font-family:'Playfair Display',serif;font-size:.84rem;font-weight:700;color:var(--ink);position:relative;z-index:1;transition:color .3s;}
+.cat-card:hover .cat-nm{color:#fff;}
+.cg1 .cat-glow{background:linear-gradient(135deg,var(--teal),var(--teal2));}
+.cg2 .cat-glow{background:linear-gradient(135deg,var(--yellow),var(--orange));}
+.cg3 .cat-glow{background:linear-gradient(135deg,var(--pink),var(--purple));}
+.cg4 .cat-glow{background:linear-gradient(135deg,#e85c8a,#f0832a);}
+.cg5 .cat-glow{background:linear-gradient(135deg,var(--purple),var(--teal));}
+.cg6 .cat-glow{background:linear-gradient(135deg,var(--green),var(--teal));}
+.cg7 .cat-glow{background:linear-gradient(135deg,var(--orange),var(--yellow));}
+.cg8 .cat-glow{background:linear-gradient(135deg,var(--pink),var(--teal));}
 
-/* MODAL */
-.mbg{position:fixed;inset:0;z-index:2000;background:rgba(14,31,36,.88);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:16px}
-.mbg.on{opacity:1;pointer-events:all}
-.mbox{background:#fff;border-radius:24px;width:100%;max-width:500px;padding:40px;transform:scale(.92) translateY(14px);transition:transform .4s cubic-bezier(.23,1,.32,1);position:relative;max-height:90vh;overflow-y:auto}
-.mbg.on .mbox{transform:scale(1) translateY(0)}
-.mx{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(14,31,36,.15);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .25s}
-.mx:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-.mtitle{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dark);margin-bottom:5px}
-.msub{font-size:12.5px;color:var(--teal);margin-bottom:24px}
-#mprice{font-family:'Playfair Display',serif;font-size:19px;color:var(--teal);font-weight:700;margin:10px 0 20px}
-.mbkwa{width:100%;background:linear-gradient(135deg,var(--wa-dark),var(--wa));color:#fff;padding:15px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 22px rgba(37,211,102,.35);margin-bottom:10px;transition:transform .25s}
-.mbkwa:hover{transform:translateY(-2px)}
+/* ══ GALLERY — scrollable per event ══ */
+.gal-events{display:flex;flex-direction:column;gap:2.5rem;}
+.gal-event-block{}
+.gal-event-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+.gal-event-label{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;color:#fff;}
+.gal-event-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);}
+/* Horizontal scroll strip per event */
+.gal-scroll{display:flex;gap:.85rem;overflow-x:auto;padding-bottom:.75rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(240,131,42,.3) transparent;}
+.gal-scroll::-webkit-scrollbar{height:4px;}
+.gal-scroll::-webkit-scrollbar-track{background:transparent;}
+.gal-scroll::-webkit-scrollbar-thumb{background:rgba(240,131,42,.35);border-radius:3px;}
+.gal-photo{flex:0 0 auto;width:clamp(180px,28vw,300px);border-radius:16px;overflow:hidden;position:relative;cursor:none;box-shadow:0 4px 18px rgba(0,0,0,.1);scroll-snap-align:start;transition:transform .35s;}
+.gal-photo:hover{transform:scale(1.04);}
+.gal-photo-inner{padding-top:72%;position:relative;}
+.gal-bg{position:absolute;inset:0;transition:transform .5s ease;}
+.gal-photo:hover .gal-bg{transform:scale(1.08);}
+.gal-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,8,0),transparent);display:flex;align-items:flex-end;padding:.85rem;transition:background .3s;}
+.gal-photo:hover .gal-ov{background:linear-gradient(to top,rgba(26,18,8,.55),transparent);}
+.gal-lbl{font-family:'Caveat',cursive;font-size:.92rem;font-weight:600;color:#fff;opacity:0;transform:translateY(8px);transition:all .3s;}
+.gal-photo:hover .gal-lbl{opacity:1;transform:none;}
+/* gallery gradient swatches */
+.gg1{background:linear-gradient(145deg,#4aada8,#7dcbc7,#f5c842);}
+.gg2{background:linear-gradient(135deg,#f0832a,#e85c8a,#9b6bb5);}
+.gg3{background:linear-gradient(135deg,#9b6bb5,#4aada8);}
+.gg4{background:linear-gradient(135deg,#e85c8a,#f0832a,#f5c842);}
+.gg5{background:linear-gradient(135deg,#4aada8,#3aaa6e,#f5c842);}
+.gg6{background:linear-gradient(135deg,#f5c842,#f0832a);}
+.gg7{background:linear-gradient(135deg,#9b6bb5,#e85c8a);}
+.gg8{background:linear-gradient(135deg,#3aaa6e,#4aada8,#7dcbc7);}
 
-/* RESPONSIVE */
+/* ══ ABOUT ══ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;}
+.ab-vis{display:flex;justify-content:center;align-items:center;position:relative;min-height:340px;}
+.ab-orb{width:clamp(200px,24vw,300px);height:clamp(200px,24vw,300px);border-radius:50%;background:conic-gradient(from 0deg,#4aada8,#7dcbc7,#f5c842,#f0832a,#e85c8a,#9b6bb5,#4aada8);display:flex;align-items:center;justify-content:center;animation:rotS 15s linear infinite;box-shadow:0 0 50px rgba(240,131,42,.22),0 0 90px rgba(232,92,138,.12);z-index:2;position:relative;}
+.ab-orb-in{width:82%;height:82%;border-radius:50%;background:conic-gradient(from 180deg,#4aada8,#f5c842,#e85c8a,#9b6bb5,#4aada8);display:flex;align-items:center;justify-content:center;animation:rotR 15s linear infinite;font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.4vw,2.2rem);font-weight:900;color:rgba(255,255,255,.95);}
+.oc{position:absolute;background:#fff;border-radius:14px;padding:.44rem .88rem;box-shadow:0 6px 22px rgba(0,0,0,.1);font-family:'Caveat',cursive;font-size:.9rem;font-weight:600;white-space:nowrap;animation:bob 3.5s ease-in-out infinite;}
+.oc1{top:2%;left:0;color:var(--teal);animation-delay:0s;}
+.oc2{bottom:6%;left:-4%;color:var(--pink);animation-delay:1s;}
+.oc3{top:18%;right:-6%;color:var(--orange);animation-delay:1.8s;}
+.oc4{bottom:18%;right:-4%;color:var(--purple);animation-delay:.7s;}
+.tag-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.1rem 0 1.5rem;}
+.atag{font-family:'Caveat',cursive;font-size:.93rem;font-weight:600;padding:.33rem .92rem;border-radius:22px;border:2px solid;}
+.at1{color:var(--teal);border-color:var(--teal);}
+.at2{color:var(--orange);border-color:var(--orange);}
+.at3{color:var(--pink);border-color:var(--pink);}
+.at4{color:var(--purple);border-color:var(--purple);}
+
+/* ══ FOOTER ══ */
+footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
+.ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;border-bottom:1px solid rgba(253,248,245,.08);padding-bottom:2rem;margin-bottom:1.8rem;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:.05em;}
+.ft-brand p{font-size:.8rem;color:rgba(253,248,245,.4);line-height:1.8;margin-top:.7rem;max-width:230px;}
+.ft-col h4{font-family:'Caveat',cursive;font-size:1.1rem;color:#fdf8f5;margin-bottom:.9rem;}
+.ft-col a{display:block;font-size:.79rem;color:rgba(253,248,245,.4);text-decoration:none;margin-bottom:.5rem;transition:color .2s;}
+.ft-col a:hover{color:var(--orange);}
+.ft-btm{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+.ft-btm p{font-size:.72rem;color:rgba(253,248,245,.22);letter-spacing:.05em;}
+.ft-soc{display:flex;gap:.65rem;}
+.ft-soc a{width:32px;height:32px;border:1px solid rgba(253,248,245,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(253,248,245,.38);text-decoration:none;font-size:.75rem;transition:all .2s;cursor:none;}
+.ft-soc a:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ══ REVEAL ══ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.rv.in{opacity:1;transform:none;}
+.rv-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease;}
+.rv-l.in{opacity:1;transform:none;}
+.rv-s{opacity:0;transform:scale(.88);transition:opacity .65s ease,transform .65s ease;}
+.rv-s.in{opacity:1;transform:none;}
+
+/* ══ RESPONSIVE ══ */
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr;gap:40px}
-  .hvisual{order:-1}
-  .hcards{width:310px;height:390px}
-  .hcm{width:240px;height:300px}
-  .egrid{grid-template-columns:repeat(2,1fr)}
-  .ec.feat{grid-column:span 2}
-  .bgrid{grid-template-columns:1fr}
-  .binfo{order:-1}
-  .pgrid{grid-template-columns:repeat(2,1fr)}
-  .pgrid>div:first-child{grid-column:span 2;grid-row:span 1}
-  .pgrid>div:nth-child(5){grid-column:span 2}
-  .jsteps{grid-template-columns:1fr 1fr}
-  .fgrid{grid-template-columns:1fr 1fr;gap:32px}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .ft-grid{grid-template-columns:1fr 1fr;}
+  .ft-col:last-child{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .ab-vis{min-height:260px;}
+  .oc{display:none;}
 }
-@media(max-width:768px){
-  :root{--nav-h:62px}
-  nav{padding:0 18px}
-  .ndesk{display:none}
-  .ham{display:flex}
-  .hero{padding:calc(var(--nav-h)+28px) 18px 44px;gap:32px}
-  .hvisual{display:none}
-  .hstats{gap:22px}
-  .snum{font-size:26px}
-  .hbtns{gap:9px}
-  .bteal,.bwa{padding:13px 22px;font-size:13px}
-  .sw,.story,.past,.bsec,.tsec,.cta{padding:68px 18px}
-  .evhead{flex-direction:column;align-items:flex-start}
-  .egrid{grid-template-columns:1fr;gap:20px}
-  .ec.feat{grid-column:span 1}
-  .ec.feat .ecimg{height:210px;font-size:76px}
-  .pgrid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
-  .pgrid>div:first-child{grid-column:span 2;grid-row:span 1}
-  .pgrid>div:nth-child(5){grid-column:span 2}
-  .jsteps{grid-template-columns:1fr}
-  .tgrid{grid-template-columns:1fr}
-  .fgrid{grid-template-columns:1fr;gap:28px}
-  .bcard{padding:26px 20px}
-  .fr{grid-template-columns:1fr}
-  .cbtns{flex-direction:column;align-items:center}
-  .cbwa,.cbow{width:100%;justify-content:center;max-width:320px}
-  .snudge{flex-direction:column;align-items:flex-start;gap:10px;padding:14px 18px}
-  .nacts{width:100%}
-  .nwabtn{flex:1;justify-content:center}
-  .mbox{padding:26px 18px}
-  .fbot{flex-direction:column;text-align:center}
-  .wafab{bottom:76px;right:14px}
-  .ecacts{flex-direction:row}
-  .bkwa,.bkdet{padding:9px 13px;font-size:11.5px}
+@media(max-width:820px){
+  .nav-links{display:none;}
+  .ham{display:flex;}
+  .hero{flex-direction:column;text-align:center;padding:6.5rem 5vw 3rem;gap:2.5rem;min-height:auto;}
+  .hero-left>*{animation:fadeUp .9s ease both;}
+  .hw-tag,.pills,.hero-btns,.soc-row{justify-content:center;}
+  .hero-desc{margin:0 auto 1.5rem;}
+  .hero-right{width:100%;}
+  .orb-wrap{width:clamp(200px,55vw,300px);height:clamp(200px,55vw,300px);margin:0 auto;}
+  .fbadge{display:none;}
+  .c-tr,.c-bl,.c-br{opacity:.6;}
 }
-@media(max-width:380px){
-  .htitle{font-size:36px}
-  .stitle{font-size:26px}
-  .ecacts{flex-direction:column}
-  .bkwa,.bkdet{width:100%;justify-content:center}
+@media(max-width:600px){
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+  .stats{padding:3rem 5vw;}
+  .ft-grid{grid-template-columns:1fr;}
+  .ft-col{display:none;}
+  .ft-btm{flex-direction:column;text-align:center;}
+}
+@media(max-width:400px){
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-main,.btn-out{width:100%;justify-content:center;}
 }
 </style>
 </head>
 <body>
 
-<div id="prog"></div>
-<div class="cur" id="cur"></div>
-<div class="curR" id="curR"></div>
+<!-- CURSOR -->
+<div id="cur"></div><div id="curt"></div>
 
-<!-- WA FAB -->
-<a class="wafab" href="https://wa.me/1234567890?text=Hi!%20I%20want%20to%20know%20about%20Life%20is%20Art%20events%20🌻" target="_blank" rel="noopener">
-  <div class="wafab-tip">Chat with us!</div>💬
-</a>
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <a href="#" onclick="cMob()">Home</a>
+  <a href="#events" onclick="cMob()">Events</a>
+  <a href="#cats" onclick="cMob()">Explore</a>
+  <a href="#gallery" onclick="cMob()">Gallery</a>
+  <a href="#about" onclick="cMob()">About</a>
+  <a href="#events" class="mob-cta" onclick="cMob()">Book Now ✿</a>
+</div>
 
-<!-- STICKY NUDGE -->
-<div class="snudge" id="nudge">
-  <div>
-    <div class="ntext">✨ Ready to book your creative experience?</div>
-    <div class="nsub">Spots filling fast — reserve yours in seconds on WhatsApp</div>
-  </div>
-  <div class="nacts">
-    <button class="nwabtn" onclick="openWA()">💬 Book on WhatsApp</button>
-    <button class="ncls" onclick="dismissNudge()">×</button>
+<!-- BOOKING MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button type="button" class="mx" onclick="cModal()">✕</button>
+    <div class="mbadge" id="mBadge">✿ Event</div>
+    <div class="mtitle">Reserve Your Spot 🌻</div>
+    <label class="fl">Your Name</label>
+    <input class="fi" id="bName" type="text" placeholder="e.g. Priya Sharma"/>
+    <label class="fl">Phone Number</label>
+    <input class="fi" id="bPhone" type="tel" placeholder="+91 98765 43210"/>
+    <label class="fl">Number of Seats</label>
+    <select class="fi" id="bSeats">
+      <option value="1">1 seat</option><option value="2">2 seats</option>
+      <option value="3">3 seats</option><option value="4">4 seats</option>
+    </select>
+    <label class="fl">Message (optional)</label>
+    <textarea class="fi" id="bNote" placeholder="Special requests, dietary needs..."></textarea>
+    <button type="button" class="btn-wa" id="waBook" aria-label="Confirm booking via WhatsApp">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Confirm via WhatsApp
+    </button>
   </div>
 </div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nlogo">
-    <div class="lmark">🌻</div>
-    <div class="lwords"><strong>Life is Art</strong><span>Events & Experiences</span></div>
+  <a class="logo-wrap" href="#">
+    <div class="logo-front"><img src="logo.png" alt="Logo Dot" style="height: auto; width: 163%;"></div>
+    <!--<div class="logo-txt"><img src="logo.png" alt="Logo" style="width: 10%; height: auto;"></div>-->
   </a>
-  <div class="ndesk">
-    <a href="#events">Events</a>
-    <a href="#past">Gallery</a>
-    <a href="#booking">Book</a>
-    <a href="#testi">Stories</a>
-    <a href="https://wa.me/1234567890?text=Hi!%20I'd%20like%20to%20book%20an%20event%20🌻" class="nwa" target="_blank" rel="noopener">💬 WhatsApp Us</a>
-  </div>
-  <button class="ham" id="ham" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#cats">Explore</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#events" class="nav-cta">Book Now ✿</a></li>
+  </ul>
+  <button class="ham" id="ham" onclick="tMob()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mmenu" id="mm">
-  <a href="#events" onclick="toggleMenu()">Events</a>
-  <a href="#past" onclick="toggleMenu()">Gallery</a>
-  <a href="#booking" onclick="toggleMenu()">Book</a>
-  <a href="#testi" onclick="toggleMenu()">Stories</a>
-  <a class="mm-wa" href="https://wa.me/1234567890?text=Hi!%20I'd%20like%20to%20book%20an%20event%20🌻" target="_blank" rel="noopener" onclick="toggleMenu()">💬 Book on WhatsApp</a>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+
+  <!-- Paint canvas — animated brush splats appear on load -->
+  <div class="paint-canvas" id="paintCanvas" aria-hidden="true"></div>
+
+  <!-- TOP-RIGHT CORNER — botanical leaves + swirl ring + coffee beans — MaCaBo colors -->
+  <div class="corner c-tr">
+    <svg viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gtr" cx="70%" cy="25%" r="65%">
+          <stop offset="0%" stop-color="#f5c842" stop-opacity=".7"/>
+          <stop offset="50%" stop-color="#f0832a" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="#4aada8" stop-opacity=".1"/>
+        </radialGradient>
+        <filter id="btr"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+      <ellipse cx="310" cy="90" rx="130" ry="85" fill="url(#gtr)" filter="url(#btr)" opacity=".55"/>
+      <!-- Big swirl arc — teal instead of terracotta -->
+      <path d="M205 14 Q308 -6 368 76 Q418 152 374 232 Q342 288 272 295" stroke="#4aada8" stroke-width="14" fill="none" stroke-linecap="round" opacity=".52"/>
+      <path d="M222 7 Q316 0 372 80 Q418 158 372 238" stroke="#7dcbc7" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".25"/>
+      <!-- Rainbow beans cluster -->
+      <ellipse cx="316" cy="50" rx="13" ry="8" fill="#f0832a" opacity=".8" transform="rotate(-20 316 50)"/>
+      <path d="M309 47 Q316 54 323 47" stroke="#fff" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <ellipse cx="350" cy="84" rx="11" ry="7" fill="#e85c8a" opacity=".7" transform="rotate(15 350 84)"/>
+      <path d="M343 81 Q350 87 357 81" stroke="#fff" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+      <ellipse cx="332" cy="117" rx="10" ry="6.5" fill="#9b6bb5" opacity=".62" transform="rotate(-28 332 117)"/>
+      <ellipse cx="290" cy="42" rx="9" ry="5.5" fill="#f5c842" opacity=".55" transform="rotate(10 290 42)"/>
+      <circle cx="362" cy="54" r="6" fill="#4aada8" opacity=".58"/>
+      <circle cx="374" cy="142" r="5" fill="#e85c8a" opacity=".45"/>
+      <circle cx="276" cy="148" r="4.5" fill="#f0832a" opacity=".38"/>
+      <!-- Botanical leaves — multicolor -->
+      <path d="M112 14 Q180 -10 232 52 Q206 34 166 62 Q140 74 112 14Z" fill="#4aada8" opacity=".18"/>
+      <path d="M112 14 Q172 32 232 52" stroke="#4aada8" stroke-width="1.4" fill="none" opacity=".42"/>
+      <path d="M133 22 Q166 34 198 46" stroke="#4aada8" stroke-width=".8" fill="none" opacity=".28"/>
+      <path d="M150 32 Q182 44 212 52" stroke="#4aada8" stroke-width=".8" fill="none" opacity=".22"/>
+      <path d="M72 34 Q136 10 174 66 Q150 50 117 76 Q94 86 72 34Z" fill="#f0832a" opacity=".13"/>
+      <path d="M72 34 Q126 50 174 66" stroke="#f0832a" stroke-width="1.2" fill="none" opacity=".35"/>
+      <!-- Reed lines -->
+      <path d="M28 0 Q44 48 33 93" stroke="#9b6bb5" stroke-width="2.1" fill="none" opacity=".28" stroke-linecap="round"/>
+      <path d="M46 0 Q59 44 51 88" stroke="#e85c8a" stroke-width="1.7" fill="none" opacity=".22" stroke-linecap="round"/>
+      <path d="M63 2 Q73 46 67 90" stroke="#4aada8" stroke-width="1.4" fill="none" opacity=".18" stroke-linecap="round"/>
+      <path d="M16 6 Q35 55 23 100" stroke="#f0832a" stroke-width="1.6" fill="none" opacity=".2" stroke-linecap="round"/>
+      <path d="M6 10 Q28 59 14 106" stroke="#f5c842" stroke-width="1.2" fill="none" opacity=".15" stroke-linecap="round"/>
+      <circle cx="210" cy="22" r="21" stroke="#4aada8" stroke-width="1.5" fill="none" opacity=".3" stroke-dasharray="4 3"/>
+      <circle cx="180" cy="90" r="12" stroke="#e85c8a" stroke-width="1" fill="none" opacity=".22"/>
+    </svg>
+  </div>
+
+  <!-- BOTTOM-LEFT CORNER — orange/pink blobs + tropical leaves -->
+  <div class="corner c-bl">
+    <svg viewBox="0 0 310 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gbl" cx="28%" cy="72%" r="65%">
+          <stop offset="0%" stop-color="#f5c842" stop-opacity=".85"/>
+          <stop offset="55%" stop-color="#e85c8a" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="#9b6bb5" stop-opacity=".1"/>
+        </radialGradient>
+        <filter id="bbl"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <ellipse cx="95" cy="215" rx="135" ry="82" fill="url(#gbl)" filter="url(#bbl)" opacity=".65"/>
+      <!-- Blobs -->
+      <path d="M0 270 Q-4 178 57 155 Q118 132 165 168 Q208 202 190 242 Q174 268 90 265 Q22 262 0 270Z" fill="#f5c842" opacity=".62"/>
+      <path d="M0 270 Q8 188 65 165 Q122 142 162 175 Q200 205 182 245 Q165 270 82 268 Q16 265 0 270Z" fill="#e85c8a" opacity=".55"/>
+      <path d="M0 270 Q28 218 82 210 Q138 202 158 235 Q170 254 98 262Z" fill="#9b6bb5" opacity=".38"/>
+      <!-- Leaves -->
+      <path d="M16 250 Q56 192 120 178" stroke="#4aada8" stroke-width="2.2" fill="none" opacity=".58" stroke-linecap="round"/>
+      <path d="M16 250 Q70 215 120 178 Q97 213 74 240Z" fill="#4aada8" opacity=".08"/>
+      <path d="M30 244 Q64 218 92 208" stroke="#4aada8" stroke-width="1" fill="none" opacity=".35"/>
+      <path d="M46 237 Q80 215 108 204" stroke="#4aada8" stroke-width=".9" fill="none" opacity=".28"/>
+      <path d="M0 228 Q40 174 98 166" stroke="#f0832a" stroke-width="1.8" fill="none" opacity=".44" stroke-linecap="round"/>
+      <!-- Reeds -->
+      <path d="M8 270 Q2 232 13 200 Q19 180 9 157" stroke="#9b6bb5" stroke-width="1.9" fill="none" opacity=".38" stroke-linecap="round"/>
+      <path d="M28 270 Q22 225 33 194 Q41 172 29 150" stroke="#4aada8" stroke-width="1.6" fill="none" opacity=".3" stroke-linecap="round"/>
+      <path d="M48 270 Q42 230 53 200 Q61 178 49 156" stroke="#f0832a" stroke-width="1.3" fill="none" opacity=".24" stroke-linecap="round"/>
+      <ellipse cx="160" cy="185" rx="11" ry="6.5" fill="#f5c842" opacity=".45" transform="rotate(-20 160 185)"/>
+      <circle cx="180" cy="160" r="5" fill="#e85c8a" opacity=".35"/>
+    </svg>
+  </div>
+
+  <!-- BOTTOM-RIGHT CORNER — purple/pink blobs + leaf lines -->
+  <div class="corner c-br">
+    <svg viewBox="0 0 268 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gbr" cx="80%" cy="80%" r="62%">
+          <stop offset="0%" stop-color="#7dcbc7" stop-opacity=".85"/>
+          <stop offset="55%" stop-color="#9b6bb5" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#e85c8a" stop-opacity=".1"/>
+        </radialGradient>
+        <filter id="bbr"><feGaussianBlur stdDeviation="4.5"/></filter>
+      </defs>
+      <ellipse cx="200" cy="200" rx="115" ry="82" fill="url(#gbr)" filter="url(#bbr)" opacity=".7"/>
+      <path d="M268 250 Q200 250 158 218 Q115 184 136 146 Q156 112 210 122 Q268 132 268 182 Q268 218 268 250Z" fill="#7dcbc7" opacity=".78"/>
+      <path d="M268 250 Q222 244 200 215 Q182 188 196 164 Q214 146 247 158 Q278 172 270 210 Q268 232 268 250Z" fill="#9b6bb5" opacity=".55"/>
+      <path d="M268 212 Q256 190 260 165 Q264 150 276 160 Q284 172 276 194Z" fill="#e85c8a" opacity=".35"/>
+      <!-- Leaf -->
+      <path d="M265 65 Q244 92 222 104" stroke="#4aada8" stroke-width="2" fill="none" opacity=".44" stroke-linecap="round"/>
+      <path d="M265 87 Q240 112 216 124" stroke="#f0832a" stroke-width="1.6" fill="none" opacity=".36" stroke-linecap="round"/>
+      <path d="M258 74 Q244 90 230 97" stroke="#4aada8" stroke-width=".9" fill="none" opacity=".28"/>
+      <path d="M258 90 Q242 106 226 114" stroke="#f0832a" stroke-width=".8" fill="none" opacity=".22"/>
+      <!-- Reeds -->
+      <path d="M242 250 Q248 208 238 172 Q232 150 244 122" stroke="#9b6bb5" stroke-width="1.8" fill="none" opacity=".33" stroke-linecap="round"/>
+      <path d="M256 250 Q262 210 254 176 Q247 154 258 128" stroke="#4aada8" stroke-width="1.5" fill="none" opacity=".26" stroke-linecap="round"/>
+      <path d="M266 244 Q270 204 262 168 Q256 148 266 120" stroke="#e85c8a" stroke-width="1.2" fill="none" opacity=".2" stroke-linecap="round"/>
+      <ellipse cx="144" cy="152" rx="10" ry="6" fill="#f5c842" opacity=".4" transform="rotate(20 144 152)"/>
+      <circle cx="126" cy="168" r="5" fill="#9b6bb5" opacity=".32"/>
+    </svg>
+  </div>
+
+  <!-- HERO LEFT -->
+  <div class="hero-left">
+    <div class="hw-tag" style="animation-delay:.1s">Art · Community · Chaos · Beauty</div>
+    <h1 style="animation-delay:.25s"><span class="Ma">Ma</span><span class="Ca">Ca</span><span class="Bo">Bo</span><span class="star">✦</span></h1>
+    <div class="tagline" style="animation-delay:.4s">Make CHaOS BOotiful</div>
+    <p class="hero-desc" style="animation-delay:.55s">An art space where creativity runs wild, strangers become collaborators, and every evening is a blank canvas waiting for your story.</p>
+    <div class="pills" style="animation-delay:.7s">
+      <span class="pill pt">🎤 Open Mic</span>
+      <span class="pill pp">💌 Blind Dates</span>
+      <span class="pill po">🎬 Movie Nights</span>
+      <span class="pill py">😂 Comedy</span>
+      <span class="pill pv">🎨 Art Jams</span>
+    </div>
+    <div class="hero-btns" style="animation-delay:.85s">
+      <a href="#events" class="btn-main">✦ Explore Events</a>
+      <a href="#about" class="btn-out">Our Story →</a>
+    </div>
+    <div class="soc-row" style="animation-delay:1s">
+      <a class="soc-a" href="#" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a class="soc-a" href="#" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a class="soc-a" href="https://wa.me/918483955680" target="_blank" title="WhatsApp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+
+  <!-- HERO RIGHT — Logo circle with ink ring -->
+  <div class="hero-right">
+    <div class="orb-wrap">
+      <!-- Ink brush ring SVG -->
+      <svg class="ink-ring" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M250 28 Q345 18 408 82 Q472 148 468 252 Q464 358 396 418 Q325 480 212 472 Q108 464 52 392 Q-8 318 10 205 Q28 92 118 44 Q178 14 250 28Z" stroke="#4aada8" stroke-width="13" fill="none" opacity=".48" stroke-linecap="round"/>
+        <path d="M250 44 Q336 36 392 98 Q450 162 446 256 Q442 352 378 408 Q308 466 202 458 Q106 450 54 380 Q4 308 22 200 Q40 92 128 54 Q182 30 250 44Z" stroke="#e85c8a" stroke-width="3" fill="none" opacity=".22" stroke-linecap="round"/>
+        <path d="M382 362 Q435 382 445 425 Q452 460 412 468 Q372 474 340 452 Q308 430 330 396 Q348 368 382 362Z" fill="#f0832a" opacity=".14"/>
+        <path d="M58 312 Q28 352 44 392 Q58 424 102 418 Q134 412 138 380 Q143 345 112 330 Q82 315 58 312Z" fill="#9b6bb5" opacity=".1"/>
+      </svg>
+      <div class="orb">
+        <div class="orb-in">
+          <div class="orb-txt">
+            <span class="t1">MaCaBo</span>
+            <span class="t2">Make CHaOS BOotiful</span>
+          </div>
+        </div>
+      </div>
+      <!-- Sunflower badge -->
+      <div class="sflower">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(50,50)">
+            <ellipse rx="7.5" ry="20" fill="#e84545" transform="rotate(0) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#f0832a" transform="rotate(45) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#f5c842" transform="rotate(90) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#3aaa6e" transform="rotate(135) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#4aada8" transform="rotate(180) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#4a6ee8" transform="rotate(225) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#9b6bb5" transform="rotate(270) translate(0,-24)"/>
+            <ellipse rx="7.5" ry="20" fill="#e85c8a" transform="rotate(315) translate(0,-24)"/>
+            <circle r="15" fill="#7a5520"/>
+            <line x1="-15" y1="-7" x2="15" y2="-7" stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+            <line x1="-15" y1="0"  x2="15" y2="0"  stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+            <line x1="-15" y1="7"  x2="15" y2="7"  stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+            <line x1="-7"  y1="-15" x2="-7"  y2="15" stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+            <line x1="0"   y1="-15" x2="0"   y2="15" stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+            <line x1="7"   y1="-15" x2="7"   y2="15" stroke="rgba(245,200,66,.45)" stroke-width="1.2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="fbadge fb1">🎨 Art Space</div>
+      <div class="fbadge fb2">💌 Blind Dates</div>
+      <div class="fbadge fb3">🎬 Movie Night</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-item">Open Mic Nights</span><span class="mq-item">Blind Dates</span><span class="mq-item">Movie Screenings</span><span class="mq-item">Comedy Shows</span><span class="mq-item">Karaoke Chaos</span><span class="mq-item">Art Jams</span><span class="mq-item">Board Games</span><span class="mq-item">Wellness Sessions</span>
+    <span class="mq-item">Open Mic Nights</span><span class="mq-item">Blind Dates</span><span class="mq-item">Movie Screenings</span><span class="mq-item">Comedy Shows</span><span class="mq-item">Karaoke Chaos</span><span class="mq-item">Art Jams</span><span class="mq-item">Board Games</span><span class="mq-item">Wellness Sessions</span>
+  </div>
 </div>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero" id="home">
-  <div class="orb o1"></div><div class="orb o2"></div>
-  <div>
-    <div class="hbadge">✦ Curated Artistic Experiences</div>
-    <h1 class="htitle">Where <em>Life</em><br>Becomes Art</h1>
-    <p class="hsub">Immersive events, creative workshops & unforgettable gatherings — crafted for souls who see beauty in every moment.</p>
-    <div class="hbtns">
-      <a href="#events" class="bteal">Explore Events <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="https://wa.me/1234567890?text=Hi!%20I%20want%20to%20book%20a%20Life%20is%20Art%20event%20🌻" class="bwa" target="_blank" rel="noopener">💬 Book via WhatsApp</a>
+<!-- EVENTS -->
+<section class="s-cream" id="events">
+  <div class="eyebrow rv">Happening This Month</div>
+  <h2 class="sec-h rv">Upcoming <span class="acc">Events</span></h2>
+  <p class="sec-p rv">From soul-stirring open mics to chaotic blind dates — MaCaBo always has something to pull you out of the ordinary.</p>
+  <div class="ev-grid">
+    <div class="ev-card mic rv" style="transition-delay:.04s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">🎤 Open Mic</div>
+        <div class="ev-top-row"><div class="ev-name">Open Mic Night</div><div class="hot">🔥 Almost Full</div></div>
+        <div class="ev-date">📅 April 5, 2026 · 7:30 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="85%"></div></div>3 seats left</div>
+        <p class="ev-desc">Take the stage or just vibe. Poetry, music, spoken word — no judgement, only art.</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
     </div>
-    <div class="hstats">
-      <div><div class="snum">120+</div><div class="slbl">Events Hosted</div></div>
-      <div><div class="snum">4.9★</div><div class="slbl">Avg Rating</div></div>
-      <div><div class="snum">8K+</div><div class="slbl">Happy Guests</div></div>
+    <div class="ev-card cdy rv" style="transition-delay:.08s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">😂 Comedy</div>
+        <div class="ev-name" style="margin-bottom:.42rem">Stand Up Comedy</div>
+        <div class="ev-date">📅 April 12, 2026 · 8:00 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="40%"></div></div>12 seats left</div>
+        <p class="ev-desc">Mumbai's funniest voices, one wild evening. Laugh until it hurts.</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
     </div>
-  </div>
-  <div class="hvisual">
-    <div class="hcards">
-      <div class="hc hcm"><div class="hci"><span class="htag">⭐ Featured</span><div class="hemi">🎨</div><div><div class="hcname">Sunflower Painting Gala</div><div class="hcdate">📅 March 15 · 6 PM</div></div></div></div>
-      <div class="hc hc2"><div class="hci"><span class="htag">🏺 Workshop</span><div class="hemi" style="font-size:44px">🏺</div><div><div class="hcname">Pottery & Wine Night</div></div></div></div>
-      <div class="hc hc3"><div class="hci"><span class="htag">📷 Outdoor</span><div class="hemi" style="font-size:40px">📷</div><div><div class="hcname">Golden Hour Walk</div></div></div></div>
-      <div class="hfloat hf1"><span style="font-size:21px">🌻</span><div><div style="font-size:12px;font-weight:600;color:var(--dark)">Filling fast!</div><div style="font-size:10px;color:#8aa5ac">12 spots left</div></div></div>
-      <div class="hfloat hf2"><div class="fbig">★ 4.9</div><div style="font-size:10px;color:#8aa5ac;margin-top:2px">600+ reviews</div></div>
+    <div class="ev-card kara rv" style="transition-delay:.12s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">🎶 Karaoke</div>
+        <div class="ev-top-row"><div class="ev-name">Karaoke Chaos</div><div class="hot">🔥 Almost Full</div></div>
+        <div class="ev-date">📅 April 19, 2026 · 7:00 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="92%"></div></div>2 seats left</div>
+        <p class="ev-desc">Grab the mic and own the room. No talent required, only vibes.</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
+    </div>
+    <div class="ev-card bdte rv" style="transition-delay:.16s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">💌 Blind Date</div>
+        <div class="ev-name" style="margin-bottom:.42rem">Blind Date at MaCaBo</div>
+        <div class="ev-date">📅 April 26, 2026 · 6:30 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="25%"></div></div>18 seats left</div>
+        <p class="ev-desc">One table, two strangers, one conversation. Who knows what sparks? Show up. Find out.</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
+    </div>
+    <div class="ev-card mvie rv" style="transition-delay:.2s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">🎬 Movie Night</div>
+        <div class="ev-name" style="margin-bottom:.42rem">Movie Night Under Stars</div>
+        <div class="ev-date">📅 May 3, 2026 · 8:30 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="50%"></div></div>10 seats left</div>
+        <p class="ev-desc">Hand-picked indie film, fairy lights, and good company. Most cinematic night out. 🎬</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
+    </div>
+    <div class="ev-card gmes rv" style="transition-delay:.24s">
+      <div class="ev-bar"></div>
+      <div class="ev-body">
+        <div class="ev-chip">🎲 Games</div>
+        <div class="ev-top-row"><div class="ev-name">Board Game Takeover</div><div class="hot">🔥 Almost Full</div></div>
+        <div class="ev-date">📅 May 10, 2026 · 5:00 PM</div>
+        <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="78%"></div></div>4 seats left</div>
+        <p class="ev-desc">Strategy, bluffing, laughter, betrayal. Board games at their most beautiful. 🎲</p>
+        <button type="button" class="btn-book">💬 Reserve via WhatsApp</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SCROLL STORY ═══ -->
-<section class="story" id="story">
-  <div class="story-bg" id="sbg">EXPERIENCE</div>
-  <div class="seye rv" style="justify-content:center">Your Booking Journey</div>
-  <h2 class="stitle rv d1" style="text-align:center">From <em style="color:var(--yellow)">Scroll</em> to <em style="color:var(--teal-light)">Seat</em> in 3 Steps</h2>
-  <p class="ssub rv d2" style="color:rgba(255,255,255,.45);text-align:center;max-width:500px;margin:0 auto">No complicated forms. Just pick, tap, and show up. We made booking as beautiful as the events.</p>
-  <div class="jsteps">
-    <div class="jstep rv d1"><div style="font-size:34px;margin-bottom:12px">🌻</div><div class="jnum">1</div><div class="jtitle">Pick Your Event</div><p class="jdesc">Browse our lineup below. Every card has a green WhatsApp button — tap it to book that specific event instantly.</p></div>
-    <div class="jstep rv d2"><div style="font-size:34px;margin-bottom:12px">💬</div><div class="jnum">2</div><div class="jtitle">WhatsApp in Seconds</div><p class="jdesc">Tapping the button opens WhatsApp with your event details pre-filled. Just send — we confirm within minutes.</p></div>
-    <div class="jstep rv d3"><div style="font-size:34px;margin-bottom:12px">🎟</div><div class="jnum">3</div><div class="jtitle">Show Up & Create</div><p class="jdesc">Receive your digital ticket on WhatsApp, arrive at the venue, and dive into the most beautiful evening of your week.</p></div>
+<!-- STATS -->
+<div class="stats">
+  <div class="rv"><span class="stn" data-t="200">0</span><div class="stl">Events Hosted</div></div>
+  <div class="rv" style="transition-delay:.1s"><span class="stn" data-t="5000">0</span><div class="stl">Happy Souls</div></div>
+  <div class="rv" style="transition-delay:.2s"><span class="stn" data-t="3">0</span><div class="stl">Years of Chaos</div></div>
+  <div class="rv" style="transition-delay:.3s"><span class="stn" data-t="98">0</span><div class="stl">% Love Rate</div></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="s-bg" id="cats">
+  <div class="eyebrow rv">What We Do</div>
+  <h2 class="sec-h rv">The <span class="acc">Chaos Menu</span></h2>
+  <p class="sec-p rv">Every event curated to take you somewhere unexpected.</p>
+  <div class="cat-grid">
+    <div class="cat-card cg1 rv" style="transition-delay:.04s"><div class="cat-glow"></div><span class="cat-ico">🎤</span><div class="cat-nm">Open Mic</div></div>
+    <div class="cat-card cg2 rv" style="transition-delay:.08s"><div class="cat-glow"></div><span class="cat-ico">😂</span><div class="cat-nm">Comedy</div></div>
+    <div class="cat-card cg3 rv" style="transition-delay:.12s"><div class="cat-glow"></div><span class="cat-ico">🎶</span><div class="cat-nm">Karaoke</div></div>
+    <div class="cat-card cg4 rv" style="transition-delay:.16s"><div class="cat-glow"></div><span class="cat-ico">💌</span><div class="cat-nm">Blind Dates</div></div>
+    <div class="cat-card cg5 rv" style="transition-delay:.2s"><div class="cat-glow"></div><span class="cat-ico">🎬</span><div class="cat-nm">Movie Nights</div></div>
+    <div class="cat-card cg6 rv" style="transition-delay:.24s"><div class="cat-glow"></div><span class="cat-ico">🎲</span><div class="cat-nm">Games</div></div>
+    <div class="cat-card cg7 rv" style="transition-delay:.28s"><div class="cat-glow"></div><span class="cat-ico">🎨</span><div class="cat-nm">Art Jams</div></div>
+    <div class="cat-card cg8 rv" style="transition-delay:.32s"><div class="cat-glow"></div><span class="cat-ico">🧘</span><div class="cat-nm">Wellness</div></div>
   </div>
 </section>
 
-<!-- ═══ UPCOMING EVENTS ═══ -->
-<section class="sw" id="events">
-  <div class="evhead">
+<!-- GALLERY — scrollable per event 
+<section class="s-cream" id="gallery">
+  <div class="eyebrow rv">The Vibe Check</div>
+  <h2 class="sec-h rv">Our <span class="acc">Gallery</span></h2>
+  <p class="sec-p rv">Scroll through each event's moments — real people, real energy, real beautiful chaos. ✿</p>
+
+  <div class="gal-events">
+
+    
+    <div class="gal-event-block rv">
+      <div class="gal-event-header">
+        <div class="gal-event-label" style="background:linear-gradient(135deg,var(--teal),var(--teal2))">🎤</div>
+        <div class="gal-event-title">Open Mic Nights</div>
+      </div>
+      <div class="gal-scroll">
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">The Stage ✦</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Crowd Energy</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg3"></div><div class="gal-ov"><div class="gal-lbl">Poetry Night</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg8"></div><div class="gal-ov"><div class="gal-lbl">Solo Guitar</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">Spoken Word</div></div></div></div>
+      </div>
+    </div>
+
+    
+    <div class="gal-event-block rv" style="transition-delay:.1s">
+      <div class="gal-event-header">
+        <div class="gal-event-label" style="background:linear-gradient(135deg,#e85c8a,#f0832a)">💌</div>
+        <div class="gal-event-title">Blind Date Café</div>
+      </div>
+      <div class="gal-scroll">
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg4"></div><div class="gal-ov"><div class="gal-lbl">First Hello</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg7"></div><div class="gal-ov"><div class="gal-lbl">Table for Two</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">Conversations</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">The Spark ✨</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">New Friendships</div></div></div></div>
+      </div>
+    </div>
+
+    <-- Movie Night 
+    <div class="gal-event-block rv" style="transition-delay:.2s">
+      <div class="gal-event-header">
+        <div class="gal-event-label" style="background:linear-gradient(135deg,var(--purple),var(--teal))">🎬</div>
+        <div class="gal-event-title">Movie Nights Under Stars</div>
+      </div>
+      <div class="gal-scroll">
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg3"></div><div class="gal-ov"><div class="gal-lbl">Big Screen</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Fairy Lights</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg8"></div><div class="gal-ov"><div class="gal-lbl">Indie Picks</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg4"></div><div class="gal-ov"><div class="gal-lbl">The Audience</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">Late Night Feels</div></div></div></div>
+      </div>
+    </div>
+
+   
+    <div class="gal-event-block rv" style="transition-delay:.3s">
+      <div class="gal-event-header">
+        <div class="gal-event-label" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">🎨</div>
+        <div class="gal-event-title">Art Jams & Comedy</div>
+      </div>
+      <div class="gal-scroll">
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">Paint Session</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">Laughs &amp; Lines</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg7"></div><div class="gal-ov"><div class="gal-lbl">Canvas Stories</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">The Stage Roars</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Colour Chaos</div></div></div></div>
+      </div>
+    </div>
+  
+  </div>
+</section>
+-->
+<!-- ABOUT -->
+<section class="s-bg" id="about">
+  <div class="about-grid">
     <div>
-      <div class="seye rv">Upcoming Experiences</div>
-      <h2 class="stitle rv d1">Find Your Next <em>Creative Journey</em></h2>
-      <p class="ssub rv d2">Every card has a <strong style="color:var(--wa)">💬 Book on WhatsApp</strong> button — one tap to reserve your spot instantly.</p>
-      <div class="pills rv d3">
-        <button class="pill on" onclick="filt(this,'all')">All</button>
-        <button class="pill" onclick="filt(this,'workshop')">Workshops</button>
-        <button class="pill" onclick="filt(this,'outdoor')">Outdoor</button>
-        <button class="pill" onclick="filt(this,'social')">Social</button>
-        <button class="pill" onclick="filt(this,'gallery')">Gallery</button>
+      <div class="eyebrow rv-l">Our Story</div>
+      <h2 class="sec-h rv-l">Not a Café.<br/><span class="acc">A Canvas.</span></h2>
+      <p class="sec-p rv-l">MaCaBo — Make CHaOS BOotiful — is Mumbai's most chaotic, most colourful, most human creative gathering space. We don't serve coffee. We serve experiences. We curate the unexpected, celebrate the weird, and make space for every kind of art and every kind of person.</p>
+      <div class="tag-row rv-l">
+        <span class="atag at1">✦ Creative</span>
+        <span class="atag at2">✦ Chaotic</span>
+        <span class="atag at3">✦ Beautiful</span>
+        <span class="atag at4">✦ Community</span>
       </div>
+      <div class="rv-l"><a href="#events" class="btn-main">Join the Chaos ✿</a></div>
     </div>
-  </div>
-  <div class="egrid" id="eg">
-
-    <div class="ec feat rv" data-cat="workshop">
-      <div class="ecimg" style="background:linear-gradient(135deg,#0d4f5c,#1a9db5,#00bcd4)">🌻🎨<div class="ecov"></div><div class="eccat">⭐ Featured</div><div class="ecdtag">Mar 15</div><div class="ecsp"><span class="dot"></span>8 spots left</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Sunflower Painting Gala</h3>
-        <p class="ecdesc">An immersive evening of canvas & colour with master artist Sofia Reyes. Wine, music & all materials included.</p>
-        <div class="ecmeta"><span>📅 March 15 · 6 PM</span><span>📍 Gallery District</span><span>⏱ 4 hrs</span><span>👥 Max 20</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$95 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Sunflower Painting Gala','March 15 · 6PM','Gallery District','$95')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Sunflower Painting Gala','March 15, 2025 · 6–10 PM','Gallery District Studio','$95')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ec rv d1" data-cat="workshop">
-      <div class="ecimg" style="background:linear-gradient(135deg,#3d2314,#8b4513,#d2691e)">🏺🍷<div class="ecov"></div><div class="eccat">🏺 Workshop</div><div class="ecdtag">Apr 2</div><div class="ecsp"><span class="dot"></span>15 spots</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Pottery & Wine Night</h3>
-        <p class="ecdesc">Shape clay and sip wine in this cosy hands-on workshop. No experience needed — just joy.</p>
-        <div class="ecmeta"><span>📅 April 2 · 7 PM</span><span>📍 The Clay Studio</span><span>⏱ 3 hrs</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$75 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Pottery & Wine Night','April 2 · 7PM','The Clay Studio','$75')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Pottery & Wine Night','April 2, 2025 · 7–10 PM','The Clay Studio','$75')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ec rv d2" data-cat="outdoor">
-      <div class="ecimg" style="background:linear-gradient(135deg,#4a1942,#c2185b,#f48fb1)">📷✨<div class="ecov"></div><div class="eccat">📸 Outdoor</div><div class="ecdtag">Apr 10</div><div class="ecsp"><span class="dot"></span>20 spots</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Golden Hour Photo Walk</h3>
-        <p class="ecdesc">Capture breathtaking urban moments at magic hour with pro photographer Lena Moreau.</p>
-        <div class="ecmeta"><span>📅 April 10 · 5 PM</span><span>📍 Riverwalk</span><span>⏱ 3 hrs</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$45 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Golden Hour Photo Walk','April 10 · 5PM','Riverwalk','$45')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Golden Hour Photo Walk','April 10, 2025 · 5–8 PM','Riverwalk Promenade','$45')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ec rv d1" data-cat="social">
-      <div class="ecimg" style="background:linear-gradient(135deg,#1a2a4a,#3f51b5,#9c27b0)">🍸🎶<div class="ecov"></div><div class="eccat">🎉 Social</div><div class="ecdtag">Apr 22</div><div class="ecsp"><span class="dot"></span>50 spots</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Art Lovers Rooftop Mixer</h3>
-        <p class="ecdesc">Mingle under the stars with live music, craft cocktails and emerging local artists.</p>
-        <div class="ecmeta"><span>📅 April 22 · 8 PM</span><span>📍 The Meridian Rooftop</span><span>⏱ 3 hrs</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$55 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Art Lovers Rooftop Mixer','April 22 · 8PM','The Meridian Rooftop','$55')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Art Lovers Rooftop Mixer','April 22, 2025 · 8–11 PM','The Meridian Rooftop','$55')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ec rv d2" data-cat="gallery">
-      <div class="ecimg" style="background:linear-gradient(135deg,#1b4332,#2d6a4f,#74c69d)">🌿🖌<div class="ecov"></div><div class="eccat">🌿 Gallery</div><div class="ecdtag">May 5</div><div class="ecsp"><span class="dot"></span>12 spots</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Watercolour Botanicals</h3>
-        <p class="ecdesc">Paint delicate floral studies in a sun-filled studio. Meditative, beautiful, beginner-friendly.</p>
-        <div class="ecmeta"><span>📅 May 5 · 3 PM</span><span>📍 Arts Quarter</span><span>⏱ 3 hrs</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$65 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Watercolour Botanicals','May 5 · 3PM','Arts Quarter Studio','$65')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Watercolour Botanicals','May 5, 2025 · 3–6 PM','Arts Quarter Studio','$65')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ec rv d3" data-cat="social">
-      <div class="ecimg" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)">🎸🎨<div class="ecov"></div><div class="eccat">🎸 Live Art</div><div class="ecdtag">May 18</div><div class="ecsp"><span class="dot"></span>30 spots</div></div>
-      <div class="ecbody">
-        <h3 class="ectitle">Music & Murals Night</h3>
-        <p class="ecdesc">Watch live murals being painted to live music. Participate or simply be moved by raw creation.</p>
-        <div class="ecmeta"><span>📅 May 18 · 7 PM</span><span>📍 The Warehouse</span><span>⏱ 4 hrs</span></div>
-        <div class="ecfoot">
-          <div class="ecprice">$50 <span>/ person</span></div>
-          <div class="ecacts">
-            <button class="bkwa" onclick="cardWA('Music & Murals Night','May 18 · 7PM','The Warehouse','$50')">💬 Book on WhatsApp</button>
-            <button class="bkdet" onclick="openMod('Music & Murals Night','May 18, 2025 · 7–11 PM','The Warehouse, Arts District','$50')">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══ PAST EVENTS ═══ -->
-<section class="past" id="past">
-  <div class="seye rv" style="justify-content:center">Past Experiences</div>
-  <h2 class="stitle rv d1">Memories We <em style="color:var(--yellow)">Created</em> Together</h2>
-  <p class="ssub rv d2">A gallery of joy, creativity, and human connection from our past events.</p>
-  <div class="pgrid rv d2">
-    <div class="pi" style="background:linear-gradient(135deg,#2d1b69,#11998e)">🎭✨🌊<div class="pov"><div class="ptitle">Abstract Art Gala 2024</div><div class="pdate">✦ December 2024</div><div class="prat">👥 180 guests · ★ 4.9</div></div></div>
-    <div class="pi" style="background:linear-gradient(135deg,#c94b4b,#4b134f)">🍷🎶<div class="pov"><div class="ptitle">Wine & Jazz Night</div><div class="pdate">✦ November 2024</div><div class="prat">👥 90 guests · ★ 4.8</div></div></div>
-    <div class="pi" style="background:linear-gradient(135deg,#0f3443,#34e89e)">🌿🖌<div class="pov"><div class="ptitle">Botanical Art Fair</div><div class="pdate">✦ October 2024</div><div class="prat">👥 60 guests · ★ 5.0</div></div></div>
-    <div class="pi" style="background:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)">🌅📷<div class="pov"><div class="ptitle">Sunrise Photo Walk</div><div class="pdate">✦ September 2024</div><div class="prat">👥 25 guests · ★ 4.9</div></div></div>
-    <div class="pi" style="background:linear-gradient(135deg,#1a1a2e,#0f3460,#e94560)">🏺🎉🎨<div class="pov"><div class="ptitle">Summer Ceramics Festival 🏅</div><div class="pdate">✦ August 2024 · Best Event 2024</div><div class="prat">👥 210 guests · ★ 4.9</div></div></div>
-    <div class="pi" style="background:linear-gradient(135deg,#2c5364,#203a43,#0f2027)">🎸🎨<div class="pov"><div class="ptitle">Music & Murals</div><div class="pdate">✦ July 2024</div><div class="prat">👥 140 guests · ★ 4.7</div></div></div>
-  </div>
-</section>
-
-<!-- ═══ BOOKING ═══ -->
-<section class="bsec" id="booking">
-  <div class="bgrid">
-    <div class="binfo rv">
-      <div class="seye" style="justify-content:flex-start">Easy Booking</div>
-      <h2 class="btitle">Reserve Your <em>Spot in Seconds</em></h2>
-      <p class="btext">Fill the form and we confirm via WhatsApp in minutes. Or tap the green button on any event card above — even faster!</p>
-      <div class="flist">
-        <div class="fi-item"><div class="fii">💬</div><div><h4>WhatsApp Confirmation</h4><p>Booking confirmed on WhatsApp with event details, reminders & digital ticket.</p></div></div>
-        <div class="fi-item"><div class="fii">🎟</div><div><h4>Instant Digital Ticket</h4><p>Beautiful digital ticket arrives instantly — no printing needed ever.</p></div></div>
-        <div class="fi-item"><div class="fii">🔄</div><div><h4>Flexible Rescheduling</h4><p>Reschedule or transfer your ticket anytime up to 48 hours before the event.</p></div></div>
-      </div>
-    </div>
-    <div class="rv d1">
-      <div class="bcard">
-        <h3 class="bcard-title">Book an <span>Experience</span></h3>
-        <div class="fg"><label class="fl">Choose Event</label>
-          <select class="fs" id="bev">
-            <option>✦ Sunflower Painting Gala — Mar 15 · $95</option>
-            <option>🏺 Pottery &amp; Wine Night — Apr 2 · $75</option>
-            <option>📷 Golden Hour Photo Walk — Apr 10 · $45</option>
-            <option>🎉 Art Lovers Rooftop Mixer — Apr 22 · $55</option>
-            <option>🌿 Watercolour Botanicals — May 5 · $65</option>
-            <option>🎸 Music &amp; Murals Night — May 18 · $50</option>
-          </select></div>
-        <div class="fr">
-          <div class="fg"><label class="fl">First Name</label><input type="text" class="fi" id="bfn" placeholder="Sofia"></div>
-          <div class="fg"><label class="fl">Last Name</label><input type="text" class="fi" id="bln" placeholder="Reyes"></div>
-        </div>
-        <div class="fg"><label class="fl">WhatsApp Number</label><input type="tel" class="fi" id="bph" placeholder="+1 (555) 000-0000"></div>
-        <div class="fg"><label class="fl">Number of Spots</label>
-          <select class="fs" id="bsp"><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>Group (5+)</option></select></div>
-        <div class="warow" onclick="formWA()">
-          <span class="warow-ico">💬</span>
-          <div><div class="warow-t">Quick-book directly on WhatsApp</div><div class="warow-s">Tap to open chat — details pre-filled</div></div>
-        </div>
-        <button class="sbtn" onclick="formWA()">💬 Confirm Booking via WhatsApp <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-      </div>
+    <div class="ab-vis rv-s">
+      <div class="ab-orb"><div class="ab-orb-in">MaCaBo</div></div>
+      <div class="oc oc1">🎨 Art Space</div>
+      <div class="oc oc2">💌 Blind Dates</div>
+      <div class="oc oc3">🎬 Movie Nights</div>
+      <div class="oc oc4">🎤 Open Mic</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
-<section class="tsec" id="testi">
-  <div style="text-align:center;margin-bottom:14px">
-    <div class="seye rv" style="justify-content:center">Guest Stories</div>
-    <h2 class="stitle rv d1">Words From Our <em>Community</em></h2>
-  </div>
-  <div class="tgrid">
-    <div class="tc rv"><div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="ttext">"The Sunflower Painting Gala was the most magical evening I've had in years. The atmosphere, the people, the art — everything was perfect. Already booked my next one!"</p><div class="tauth"><div class="tav" style="background:linear-gradient(135deg,#11998e,#38ef7d)">🙋‍♀️</div><div><div class="tname">Emma Castillo</div><div class="tev">Sunflower Painting Gala</div></div></div></div>
-    <div class="tc rv d1"><div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="ttext">"I came alone to the Rooftop Mixer and left with five new friends. The WhatsApp booking was so easy and the photo follow-up was such a lovely touch!"</p><div class="tauth"><div class="tav" style="background:linear-gradient(135deg,#c94b4b,#4b134f)">🧑‍🎨</div><div><div class="tname">James Okafor</div><div class="tev">Art Lovers Mixer</div></div></div></div>
-    <div class="tc rv d2"><div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="ttext">"Pottery & Wine Night was so thoughtful and intimate. I've been to many events but this felt genuinely special. My bowl is the centrepiece of my dining table!"</p><div class="tauth"><div class="tav" style="background:linear-gradient(135deg,#3a1c71,#ffaf7b)">👩</div><div><div class="tname">Anika Sharma</div><div class="tev">Pottery & Wine Night</div></div></div></div>
-  </div>
-</section>
-
-<!-- ═══ CTA ═══ -->
-<section class="cta">
-  <h2 class="ctitle rv">Your Next <em>Beautiful</em><br>Moment Awaits</h2>
-  <p class="csub rv d1">Join thousands of creative souls who've found their tribe here.</p>
-  <div class="cbtns rv d2">
-    <a href="https://wa.me/1234567890?text=Hi!%20I%20want%20to%20book%20a%20Life%20is%20Art%20event!%20🌻" class="cbwa" target="_blank" rel="noopener">💬 Book via WhatsApp</a>
-    <a href="#events" class="cbow">Browse All Events <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer>
-  <div class="fgrid">
-    <div>
-      <div class="lmark">🌻</div>
-      <div class="fbname">Life is Art</div>
-      <p class="fbdesc">Crafting unforgettable moments where creativity, joy, and human connection bloom. Every event is a canvas — and you are the art.</p>
-      <div class="fsocs">
-        <a class="fsoc" href="#" title="Instagram">📸</a>
-        <a class="fsoc" href="#" title="Facebook">📘</a>
-        <a class="fsoc" href="https://wa.me/1234567890" title="WhatsApp">💬</a>
-        <a class="fsoc" href="#" title="TikTok">🎵</a>
-      </div>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <div class="ft-logo"><span class="Ma">Ma</span><span class="Ca">Ca</span><span class="Bo">Bo</span></div>
+      <p>Make CHaOS BOotiful. Mumbai's most colourful art space — where every evening is a new canvas.</p>
     </div>
-    <div><h5>Events</h5><div class="flinks"><a href="#events">Upcoming Events</a><a href="#past">Past Gallery</a><a href="#">Private Bookings</a><a href="#">Corporate Events</a><a href="#">Gift Cards</a></div></div>
-    <div><h5>Company</h5><div class="flinks"><a href="#">About Us</a><a href="#">Our Artists</a><a href="#">Blog</a><a href="#">Press</a><a href="#">Careers</a></div></div>
-    <div><h5>Contact</h5><div class="flinks"><a href="https://wa.me/1234567890">💬 WhatsApp Chat</a><a href="mailto:hello@lifeisart.com">✉️ hello@lifeisart.com</a><a href="#">📍 The Arts District</a><a href="#">FAQ</a><a href="#">Refund Policy</a></div></div>
+    <div class="ft-col">
+      <h4>Explore</h4>
+      <a href="#events">Upcoming Events</a>
+      <a href="#cats">Chaos Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">Our Story</a>
+    </div>
+    <div class="ft-col">
+      <h4>Connect</h4>
+      <a href="https://wa.me/918483955680" target="_blank">WhatsApp</a>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
   </div>
-  <div class="fbot"><div>© 2025 Life is Art Events. Made with 🌻 & creativity.</div><div><a href="#">Privacy</a> · <a href="#">Terms</a></div></div>
+  <div class="ft-btm">
+    <p>© 2026 MaCaBo · Mumbai · Make CHaOS BOotiful ✿</p>
+    <div class="ft-soc">
+      <a href="#" title="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="https://wa.me/918483955680" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
 </footer>
 
-<!-- ═══ MODAL ═══ -->
-<div class="mbg" id="mb" onclick="closeMod(event)">
-  <div class="mbox" onclick="event.stopPropagation()">
-    <button class="mx" onclick="closeMod()">✕</button>
-    <div class="mtitle" id="mt"></div>
-    <div class="msub" id="ms"></div>
-    <div id="mprice"></div>
-    <div class="fg"><label class="fl">Your Name</label><input type="text" class="fi" id="mn" placeholder="Your full name"></div>
-    <div class="fg"><label class="fl">WhatsApp Number</label><input type="tel" class="fi" id="mphone" placeholder="+1 (555) 000-0000"></div>
-    <div class="fg"><label class="fl">Spots Needed</label><select class="fs" id="msp"><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>Group (5+)</option></select></div>
-    <button class="mbkwa" onclick="modWA()">💬 Book This Event on WhatsApp</button>
-  </div>
-</div>
-
 <script>
-// CURSOR
-const isFP = matchMedia('(pointer:fine)').matches;
-const cur=document.getElementById('cur'), curR=document.getElementById('curR');
-let mx=0,my=0,rx=0,ry=0;
-if(isFP){
-  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
-  (function raf(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; curR.style.left=rx+'px'; curR.style.top=ry+'px'; requestAnimationFrame(raf); })();
-  document.querySelectorAll('a,button,.ec,.pi,.pill').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ cur.style.transform='translate(-50%,-50%) scale(2.8)'; curR.style.transform='translate(-50%,-50%) scale(1.7)'; });
-    el.addEventListener('mouseleave',()=>{ cur.style.transform='translate(-50%,-50%) scale(1)'; curR.style.transform='translate(-50%,-50%) scale(1)'; });
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),curt=document.getElementById('curt');
+let mx=window.innerWidth/2,my=window.innerHeight/2,tx=mx,ty=my;
+if(cur&&curt){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function loop(){tx+=(mx-tx)*.13;ty+=(my-ty)*.13;curt.style.left=tx+'px';curt.style.top=ty+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.ev-card,.cat-card,.gal-photo,.pill').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.classList.add('big');curt.classList.add('big');});
+    el.addEventListener('mouseleave',()=>{cur.classList.remove('big');curt.classList.remove('big');});
   });
 }
 
-// PROGRESS BAR
-const prog=document.getElementById('prog');
-const onScroll=()=>{
-  const pct=scrollY/(document.body.scrollHeight-innerHeight)*100;
-  prog.style.width=pct+'%';
-  // nav shadow
-  document.getElementById('nav').classList.toggle('up',scrollY>50);
-  // story parallax
-  const sb=document.getElementById('sbg');
-  if(sb) sb.style.transform=`translate(-50%,-50%) translateX(${scrollY*.05}px)`;
-  // sticky nudge
-  const nudge=document.getElementById('nudge');
-  if(!nudgeDone && pct>32) nudge.classList.add('sh');
-  else if(pct<15) nudge.classList.remove('sh');
-};
-window.addEventListener('scroll',onScroll,{passive:true});
-
-// MOBILE MENU
-function toggleMenu(){
-  const h=document.getElementById('ham'), m=document.getElementById('mm');
-  h.classList.toggle('o'); m.classList.toggle('o');
-  document.body.style.overflow=m.classList.contains('o')?'hidden':'';
-}
-document.addEventListener('click',e=>{
-  const m=document.getElementById('mm'), h=document.getElementById('ham');
-  if(m.classList.contains('o') && !m.contains(e.target) && !h.contains(e.target)) toggleMenu();
-});
-
-// REVEAL
-const rv=document.querySelectorAll('.rv');
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); }),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-rv.forEach(el=>obs.observe(el));
-
-// FILTER
-function filt(btn,cat){
-  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('#eg .ec').forEach(c=>{
-    const show=cat==='all'||c.dataset.cat===cat;
-    c.style.opacity='0';
-    if(!show){ c.style.display='none'; return; }
-    c.style.display='flex';
-    setTimeout(()=>{ c.style.transition='opacity .4s'; c.style.opacity='1'; },30);
+/* ── PAINT CANVAS — animated blob splats appear on hero load ── */
+(function buildPaint(){
+  const canvas=document.getElementById('paintCanvas');
+  if(!canvas)return;
+  const blobs=[
+    {w:'min(42vw,500px)',h:'min(17vw,195px)',bg:'rgba(74,173,168,.15)',t:'7%',r:'2%',rot:'-10deg',delay:.15},
+    {w:'min(48vw,560px)',h:'min(19vw,215px)',bg:'rgba(240,131,42,.12)',b:'5%',l:'-2%',rot:'7deg',delay:.4},
+    {w:'min(28vw,340px)',h:'min(12vw,140px)',bg:'rgba(232,92,138,.11)',t:'30%',r:'22%',rot:'4deg',delay:.65},
+    {w:'min(20vw,240px)',h:'min(9vw,105px)',bg:'rgba(245,200,66,.15)',b:'22%',r:'12%',rot:'-5deg',delay:.9},
+    {w:'min(26vw,310px)',h:'min(11vw,125px)',bg:'rgba(155,107,181,.1)',t:'12%',l:'8%',rot:'14deg',delay:1.1},
+  ];
+  blobs.forEach(b=>{
+    const d=document.createElement('div');
+    d.style.cssText=`position:absolute;border-radius:55% 45% 60% 40%/45% 60% 40% 55%;opacity:0;
+      width:${b.w};height:${b.h};background:${b.bg};transform-origin:left center;
+      ${b.t?'top:'+b.t+';':''}${b.b?'bottom:'+b.b+';':''}
+      ${b.l?'left:'+b.l+';':''}${b.r?'right:'+b.r+';':''}
+      transform:rotate(${b.rot}) scaleX(0);
+      animation:paintIn 1.2s ${b.delay}s ease forwards;`;
+    canvas.appendChild(d);
   });
-}
+  const dots=[
+    {s:13,c:'var(--teal)',t:'20%',l:'44%',d:.9},{s:9,c:'var(--pink)',t:'70%',l:'40%',d:1.3},
+    {s:17,c:'var(--yellow)',t:'38%',l:'54%',d:1.7},{s:11,c:'var(--purple)',t:'58%',l:'66%',d:2.1},
+    {s:8,c:'var(--orange)',t:'24%',l:'70%',d:2.5},{s:19,c:'rgba(74,173,168,.25)',t:'82%',l:'57%',d:2.9},
+    {s:15,c:'rgba(232,92,138,.2)',t:'14%',l:'33%',d:1.1},
+  ];
+  dots.forEach(p=>{
+    const d=document.createElement('div');
+    d.style.cssText=`position:absolute;border-radius:50%;width:${p.s}px;height:${p.s}px;
+      background:${p.c};top:${p.t};left:${p.l};opacity:0;
+      animation:splatPop .7s ${p.d}s cubic-bezier(.34,1.56,.64,1) forwards;`;
+    canvas.appendChild(d);
+  });
+})();
 
-// WHATSAPP — card direct book
-function cardWA(title,date,loc,price){
-  const msg=encodeURIComponent(`Hi Life is Art! 🌻\n\nI'd like to book:\n\n*${title}*\n📅 ${date}\n📍 ${loc}\n💰 ${price}/person\n\nPlease confirm my spot! ✨`);
-  window.open(`https://wa.me/1234567890?text=${msg}`,'_blank');
-}
-// generic
-function openWA(){ window.open('https://wa.me/1234567890?text=Hi!%20I%20want%20to%20book%20a%20Life%20is%20Art%20event%20🌻','_blank'); }
-// form
-function formWA(){
-  const ev=document.getElementById('bev').value;
-  const fn=(document.getElementById('bfn').value||'Guest');
-  const ln=document.getElementById('bln').value;
-  const ph=document.getElementById('bph').value;
-  const sp=document.getElementById('bsp').value;
-  const msg=encodeURIComponent(`Hi Life is Art! 🌻\n\nBooking Request:\n\n📅 *${ev}*\n👤 ${fn} ${ln}\n📞 ${ph||'(not provided)'}\n👥 ${sp}\n\nPlease confirm! ✨`);
-  window.open(`https://wa.me/1234567890?text=${msg}`,'_blank');
-}
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>55),{passive:true});
 
-// MODAL
-let mEv={};
-function openMod(title,sub,loc,price){
-  mEv={title,sub,loc,price};
-  document.getElementById('mt').textContent=title;
-  document.getElementById('ms').textContent=sub+' · '+loc;
-  document.getElementById('mprice').textContent=price+' per person';
-  document.getElementById('mb').classList.add('on');
+/* ── MOBILE MENU ── */
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+function tMob(){ham.classList.toggle('open');mob.classList.toggle('open');}
+function cMob(){ham.classList.remove('open');mob.classList.remove('open');}
+
+/* ── MODAL ── */
+let _ev='',_dt='';
+function oModal(ev,dt){
+  _ev=ev;_dt=dt;
+  document.getElementById('mBadge').textContent='✿ '+ev+' — '+dt;
+  document.getElementById('overlay').classList.add('show');
   document.body.style.overflow='hidden';
 }
-function closeMod(e){
-  if(!e||e.target===document.getElementById('mb')){ document.getElementById('mb').classList.remove('on'); document.body.style.overflow=''; }
-}
-function modWA(){
-  const name=document.getElementById('mn').value||'Guest';
-  const sp=document.getElementById('msp').value;
-  const ph=document.getElementById('mphone').value;
-  const msg=encodeURIComponent(`Hi Life is Art! 🌻\n\nI'd love to book:\n\n*${mEv.title}*\n📅 ${mEv.sub}\n📍 ${mEv.loc}\n👤 ${name}\n📞 ${ph||'(not provided)'}\n👥 ${sp}\n💰 ${mEv.price}/person\n\nPlease confirm! ✨`);
-  window.open(`https://wa.me/1234567890?text=${msg}`,'_blank');
-}
 
-// STICKY NUDGE dismiss
-let nudgeDone=false;
-function dismissNudge(){ nudgeDone=true; document.getElementById('nudge').classList.remove('sh'); }
+function cModal(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)cModal();});
+const _modalPanel=document.querySelector('#overlay .modal');
+if(_modalPanel)_modalPanel.addEventListener('click',function(e){e.stopPropagation();});
+function sendWA(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  const n=document.getElementById('bName').value.trim();
+  const p=document.getElementById('bPhone').value.trim();
+  const s=document.getElementById('bSeats').value;
+  const nt=document.getElementById('bNote').value.trim();
+  if(!n){alert('Please enter your name 🙏');return;}
+  let msg=`Hi MaCaBo! ✿\n\nI'd love to book a spot for *${_ev}* on *${_dt}*.\n\n*Name:* ${n}\n*Seats:* ${s}`;
+  if(p) msg+=`\n*Phone:* ${p}`;
+  if(nt) msg+=`\n*Note:* ${nt}`;
+  msg+=`\n\nPlease confirm my spot! Make CHaOS BOotiful 🌻`;
+  const url='https://api.whatsapp.com/send?phone=918483955680&text='+encodeURIComponent(msg);
+  const ua=navigator.userAgent||'';
+  const mobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  const inApp=/FBAN|FBAV|Instagram|Line\/|Snapchat|Twitter/i.test(ua);
+  if(mobile||inApp){window.location.assign(url);}
+  else{
+    const tab=window.open(url,'_blank');
+    if(tab){try{tab.opener=null;}catch(_){}}
+    else{window.location.assign(url);}
+  }
+  cModal();
+}
+const waBook=document.getElementById('waBook');
+if(waBook)waBook.addEventListener('click',sendWA);
 
-// SMOOTH ANCHORS
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+document.querySelectorAll('#events .ev-card .btn-book').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const card=this.closest('.ev-card');
+    if(!card)return;
+    const nameEl=card.querySelector('.ev-name');
+    const dateEl=card.querySelector('.ev-date');
+    const ev=nameEl?nameEl.textContent.trim():'Event';
+    let dt=dateEl?dateEl.textContent.trim():'';
+    dt=dt.replace(/^[\s📅]+/u,'').replace(/\s*·\s*.+$/,'').trim()||dt;
+    oModal(ev,dt);
   });
 });
+
+window.oModal=oModal;
+window.cModal=cModal;
+window.sendWA=sendWA;
+window.tMob=tMob;
+window.cMob=cMob;
+
+/* ── SCROLL REVEAL ── */
+const rvEls=document.querySelectorAll('.rv,.rv-l,.rv-s');
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const d=parseFloat(e.target.style.transitionDelay)||0;
+    setTimeout(()=>e.target.classList.add('in'),d*1000);
+    rvObs.unobserve(e.target);
+  });
+},{threshold:.1,rootMargin:'0px 0px -28px 0px'});
+rvEls.forEach(el=>rvObs.observe(el));
+
+/* ── SEAT BAR ANIMATE ── */
+const sbObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.sfill').forEach(f=>{
+      setTimeout(()=>{f.style.width=f.dataset.w;},150);
+    });
+    sbObs.unobserve(e.target);
+  });
+},{threshold:.3});
+document.querySelectorAll('.ev-card').forEach(c=>sbObs.observe(c));
+
+/* ── COUNT UP ── */
+document.querySelectorAll('.stn').forEach(el=>{
+  new IntersectionObserver((entries,obs)=>{
+    if(!entries[0].isIntersecting)return;
+    const tgt=+el.dataset.t,dur=2000,s=performance.now();
+    const sfx=tgt>=1000?'+':tgt===98?'%':'+';
+    (function step(now){
+      const p=Math.min((now-s)/dur,1),ease=1-Math.pow(1-p,3),v=Math.floor(ease*tgt);
+      el.textContent=(v>=1000?(v/1000).toFixed(1)+'K':v)+sfx;
+      if(p<1)requestAnimationFrame(step);
+    })(s);
+    obs.unobserve(el);
+  },{threshold:.6}).observe(el);
+});
+
+/* ── PARALLAX corners on scroll ── */
+window.addEventListener('scroll',()=>{
+  const y=scrollY;
+  const tr=document.querySelector('.c-tr');
+  const bl=document.querySelector('.c-bl');
+  const br=document.querySelector('.c-br');
+  if(tr)tr.style.transform=`translateY(${y*.1}px)`;
+  if(bl)bl.style.transform=`translateY(${-y*.07}px)`;
+  if(br)br.style.transform=`translateY(${-y*.08}px)`;
+},{passive:true});
 </script>
 </body>
 </html>
