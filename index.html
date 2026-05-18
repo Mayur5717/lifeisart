@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>MaCaBo — Make CHaOS BOotiful</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 /* ══ TOKENS ══ */
@@ -53,10 +55,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem
 nav.scrolled{background:rgba(248,242,238,.95);backdrop-filter:blur(16px);box-shadow:0 2px 28px rgba(240,131,42,.1);padding:.72rem 5vw;}
 .logo-wrap{display:flex;align-items:center;gap:.55rem;text-decoration:none;}
 .logo-dot{width:90px;height:90px;border-radius:50%;background:var(--logo);background-size:200%;animation:gs 5s ease infinite;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;font-weight:900;color:#fff;box-shadow:0 4px 14px rgba(240,131,42,.28);transition:transform .3s;}
-.logo-front{height: 90px;width:90px;animation:gs 5s ease infinite;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+.logo-front{height:90px;width:90px;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
 .logo-wrap:hover .logo-dot{transform:rotate(-10deg) scale(1.1);}
-.logo-txt{font-family:'Playfair Display',serif;font-size:1.42rem;font-weight:900;letter-spacing:.05em;}
+.logo-txt{font-family:'Playfair Display',serif;font-size:1.42rem;font-weight:900;letter-spacing:0;}
 .Ma{color:var(--teal);}.Ca{color:var(--orange);}.Bo{color:var(--pink);}
+.hero h1,.ft-logo{letter-spacing:0;}
 .nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
 .nav-links a{text-decoration:none;font-size:.78rem;font-weight:500;color:var(--ink2);letter-spacing:.06em;position:relative;transition:color .2s;}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--logo);border-radius:2px;transition:width .3s;}
@@ -124,7 +127,7 @@ textarea.fi{resize:none;height:70px;cursor:text;}
 .hw-tag::before{content:'';width:28px;height:2px;background:var(--teal);border-radius:2px;flex-shrink:0;}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7.5vw,6.2rem);font-weight:900;line-height:1.0;margin-bottom:.5rem;animation-delay:.25s;}
 .hero h1 .star{display:inline-block;font-size:.42em;vertical-align:super;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:rotS 5s linear infinite;}
-.tagline{font-family:'Caveat',cursive;font-size:clamp(1.1rem,2.4vw,1.75rem);font-weight:700;letter-spacing:.07em;margin-bottom:1.1rem;animation-delay:.4s;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tagline{font-family:'Caveat',cursive;font-size:clamp(1.1rem,2.4vw,1.75rem);font-weight:700;letter-spacing:0;margin-bottom:1.1rem;animation-delay:.4s;background:var(--logo);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-desc{font-size:clamp(.83rem,1.3vw,.95rem);line-height:1.88;color:var(--ink2);max-width:420px;margin-bottom:1.5rem;font-weight:300;animation-delay:.55s;}
 .pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.7rem;animation-delay:.7s;}
 .pill{font-family:'Caveat',cursive;font-size:.9rem;font-weight:600;padding:.33rem .88rem;border-radius:24px;border:2px solid;cursor:none;transition:transform .2s,box-shadow .2s;}
@@ -167,7 +170,7 @@ textarea.fi{resize:none;height:70px;cursor:text;}
 .mq-item::after{content:'✿';font-size:.85rem;opacity:.7;}
 
 /* ══ SECTIONS ══ */
-section{padding:4.5rem 5vw;position:relative;overflow:hidden;}
+section{padding:3.25rem 5vw;position:relative;overflow:hidden;}
 .s-cream{background:var(--cream);}
 .s-bg{background:var(--bg);}
 .eyebrow{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;}
@@ -243,7 +246,7 @@ section{padding:4.5rem 5vw;position:relative;overflow:hidden;}
 .cg8 .cat-glow{background:linear-gradient(135deg,var(--pink),var(--teal));}
 
 /* ══ GALLERY — scrollable per event ══ */
-.gal-events{display:flex;flex-direction:column;gap:2.5rem;}
+.gal-events{display:flex;flex-direction:column;gap:1.75rem;}
 .gal-event-block{}
 .gal-event-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
 .gal-event-label{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;color:#fff;}
@@ -256,9 +259,13 @@ section{padding:4.5rem 5vw;position:relative;overflow:hidden;}
 .gal-photo{flex:0 0 auto;width:clamp(180px,28vw,300px);border-radius:16px;overflow:hidden;position:relative;cursor:none;box-shadow:0 4px 18px rgba(0,0,0,.1);scroll-snap-align:start;transition:transform .35s;}
 .gal-photo:hover{transform:scale(1.04);}
 .gal-photo-inner{padding-top:72%;position:relative;}
-.gal-bg{position:absolute;inset:0;transition:transform .5s ease;}
+.gal-img,.gal-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .5s ease;background:#1a1208;border:0;}
+iframe.gal-vid{object-fit:unset;}
+.gal-photo:hover .gal-img,.gal-photo:hover .gal-vid{transform:scale(1.08);}
+.gal-vid-badge{position:absolute;top:.55rem;right:.55rem;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(26,18,8,.55);color:#fff;font-size:.72rem;display:flex;align-items:center;justify-content:center;pointer-events:none;backdrop-filter:blur(4px);}
+.gal-bg{position:absolute;inset:0;z-index:0;transition:transform .5s ease;}
 .gal-photo:hover .gal-bg{transform:scale(1.08);}
-.gal-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,8,0),transparent);display:flex;align-items:flex-end;padding:.85rem;transition:background .3s;}
+.gal-ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(26,18,8,0),transparent);display:flex;align-items:flex-end;padding:.85rem;transition:background .3s;pointer-events:none;}
 .gal-photo:hover .gal-ov{background:linear-gradient(to top,rgba(26,18,8,.55),transparent);}
 .gal-lbl{font-family:'Caveat',cursive;font-size:.92rem;font-weight:600;color:#fff;opacity:0;transform:translateY(8px);transition:all .3s;}
 .gal-photo:hover .gal-lbl{opacity:1;transform:none;}
@@ -292,7 +299,7 @@ section{padding:4.5rem 5vw;position:relative;overflow:hidden;}
 /* ══ FOOTER ══ */
 footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
 .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;border-bottom:1px solid rgba(253,248,245,.08);padding-bottom:2rem;margin-bottom:1.8rem;}
-.ft-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:.05em;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:0;}
 .ft-brand p{font-size:.8rem;color:rgba(253,248,245,.4);line-height:1.8;margin-top:.7rem;max-width:230px;}
 .ft-col h4{font-family:'Caveat',cursive;font-size:1.1rem;color:#fdf8f5;margin-bottom:.9rem;}
 .ft-col a{display:block;font-size:.79rem;color:rgba(253,248,245,.4);text-decoration:none;margin-bottom:.5rem;transition:color .2s;}
@@ -388,7 +395,7 @@ footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
 <!-- NAV -->
 <nav id="nav">
   <a class="logo-wrap" href="#">
-    <div class="logo-front"><img src="logo.png" alt="Logo Dot" style="height: auto; width: 163%;"></div>
+    <div class="logo-front"><img src="logo.png" alt="MaCaBo" style="height:auto;width:163%;"></div>
     <!--<div class="logo-txt"><img src="logo.png" alt="Logo" style="width: 10%; height: auto;"></div>-->
   </a>
   <ul class="nav-links">
@@ -529,7 +536,7 @@ footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
       <a href="#about" class="btn-out">Our Story →</a>
     </div>
     <div class="soc-row" style="animation-delay:1s">
-      <a class="soc-a" href="#" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a class="soc-a" href="https://www.instagram.com/p/DYbhSZXDLc6/" target="_blank" rel="noopener noreferrer" title="MaCaBo on Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
       <a class="soc-a" href="#" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
       <a class="soc-a" href="https://wa.me/918483955680" target="_blank" title="WhatsApp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
     </div>
@@ -597,22 +604,19 @@ footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
   <p class="sec-p rv">From soul-stirring open mics to chaotic blind dates — MaCaBo always has something to pull you out of the ordinary.</p>
   <div class="ev-grid">
     <div class="ev-card mic rv" style="transition-delay:.04s">
-      <div class="ev-bar"></div>
-      <div class="ev-body">
-        <!-- <div class="ev-chip">🎤 Open Mic</div> -->
-        <div class="ev-top-row"><div class="ev-name">The chaotic sunday </div><div class="hot">🔥 Almost Full</div></div>
-        <div class="ev-date">📅 May 24(Sunday), 2026 · 6:00 to 8:00 PM</div>
-        <!-- <div class="ev-seats"><div class="sbar"><div class="sfill" style="width:0" data-w="85%"></div></div></div> -->
-        <p class="ev-desc">Take the stage or just vibe. Stand-up, music, spoken word — no judgement, only art.</p>
-        <button type="button" class="btn-book" href = "https://in.bookmyshow.com/events/sunday-macabo/ET00496472"><a href="https://in.bookmyshow.com/events/sunday-macabo/ET00496472"></a>reserve now</button>
-      </div>
+  <div class="ev-bar"></div>
+  <div class="ev-body">
+    <div class="ev-top-row">
+      <div class="ev-name">The Chaotic Sunday</div>
+      <div class="hot" id="evHot">🔥 Almost Full</div>
     </div>
-
-    
+    <div class="ev-date" id="evDate">📅 Loading...</div>
+    <p class="ev-desc">Take the stage or just vibe. Stand-up, music, spoken word — no judgement, only art.</p>
+    <button type="button" class="btn-book" id="evBookBtn">Reserve Now</button>
+  </div>
+  </div>
+  </div>
 </section>
-
-<!-- STATS -->
-
 
 <!-- CATEGORIES -->
 <section class="s-bg" id="cats">
@@ -631,77 +635,70 @@ footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
   </div>
 </section>
 
-<!-- GALLERY — scrollable per event 
+<!-- GALLERY — scrollable per event -->
 <section class="s-cream" id="gallery">
   <div class="eyebrow rv">The Vibe Check</div>
   <h2 class="sec-h rv">Our <span class="acc">Gallery</span></h2>
   <p class="sec-p rv">Scroll through each event's moments — real people, real energy, real beautiful chaos. ✿</p>
-
   <div class="gal-events">
-
-    
     <div class="gal-event-block rv">
       <div class="gal-event-header">
         <div class="gal-event-label" style="background:linear-gradient(135deg,var(--teal),var(--teal2))">🎤</div>
         <div class="gal-event-title">Open Mic Nights</div>
       </div>
       <div class="gal-scroll">
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">The Stage ✦</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Crowd Energy</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg3"></div><div class="gal-ov"><div class="gal-lbl">Poetry Night</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg8"></div><div class="gal-ov"><div class="gal-lbl">Solo Guitar</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">Spoken Word</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="https://drive.google.com/thumbnail?id=1o0kZ3iuF-JqceTFjCo82PCPLpGA7Npd_&sz=w1920" alt="The Stage ✦" loading="lazy" referrerpolicy="no-referrer"><div class="gal-bg gg1" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">The Stage ✦</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="https://drive.google.com/thumbnail?id=1xiT9UkmdUO8FCGakE5NldddR5rYxW6St&sz=w1920" alt="Crowd Energy" loading="lazy" referrerpolicy="no-referrer"><div class="gal-bg gg5" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Crowd Energy</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="https://drive.google.com/thumbnail?id=1zKMysfDpcSxhj-nxN6pH-xoDu8p7HMoh&sz=w1920" alt="Poetry Night" loading="lazy" referrerpolicy="no-referrer"><div class="gal-bg gg3" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Poetry Night</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="https://drive.google.com/thumbnail?id=1rXybiv6ou-9BuZsdL-KRudr229H-8oYI&sz=w1920" alt="Solo Guitar" loading="lazy" referrerpolicy="no-referrer"><div class="gal-bg gg8" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Solo Guitar</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><video class="gal-vid" poster="https://drive.google.com/thumbnail?id=1j1TKEbMz6LrJBZL3eCfO7lDW5vPeYBTF&sz=w1920" muted loop playsinline preload="metadata"><source src="https://drive.google.com/uc?export=download&id=1j1TKEbMz6LrJBZL3eCfO7lDW5vPeYBTF" type="video/mp4"></video><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg2" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Spoken Word</div></div></div></div>
       </div>
     </div>
 
-    
-    <div class="gal-event-block rv" style="transition-delay:.1s">
+    <!-- <div class="gal-event-block rv" style="transition-delay:.1s">
       <div class="gal-event-header">
         <div class="gal-event-label" style="background:linear-gradient(135deg,#e85c8a,#f0832a)">💌</div>
         <div class="gal-event-title">Blind Date Café</div>
       </div>
-      <div class="gal-scroll">
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg4"></div><div class="gal-ov"><div class="gal-lbl">First Hello</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg7"></div><div class="gal-ov"><div class="gal-lbl">Table for Two</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">Conversations</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">The Spark ✨</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">New Friendships</div></div></div></div>
+      <div class="gal-scroll"> 
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/blind-date/01-hello.jpg" alt="First Hello" loading="lazy"><div class="gal-bg gg4" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">First Hello</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/blind-date/02-table.jpg" alt="Table for Two" loading="lazy"><div class="gal-bg gg7" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Table for Two</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/blind-date/03-conversations.jpg" alt="Conversations" loading="lazy"><div class="gal-bg gg2" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Conversations</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/blind-date/04-spark.jpg" alt="The Spark ✨" loading="lazy"><div class="gal-bg gg6" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">The Spark ✨</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/blind-date/05-friendships.jpg" alt="New Friendships" loading="lazy"><div class="gal-bg gg1" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">New Friendships</div></div></div></div>
       </div>
     </div>
 
-    <-- Movie Night 
     <div class="gal-event-block rv" style="transition-delay:.2s">
       <div class="gal-event-header">
         <div class="gal-event-label" style="background:linear-gradient(135deg,var(--purple),var(--teal))">🎬</div>
         <div class="gal-event-title">Movie Nights Under Stars</div>
       </div>
       <div class="gal-scroll">
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg3"></div><div class="gal-ov"><div class="gal-lbl">Big Screen</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Fairy Lights</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg8"></div><div class="gal-ov"><div class="gal-lbl">Indie Picks</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg4"></div><div class="gal-ov"><div class="gal-lbl">The Audience</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">Late Night Feels</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/movie-night/01-big-screen.jpg" alt="Big Screen" loading="lazy"><div class="gal-bg gg3" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Big Screen</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/movie-night/02-lights.jpg" alt="Fairy Lights" loading="lazy"><div class="gal-bg gg5" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Fairy Lights</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/movie-night/03-indie.jpg" alt="Indie Picks" loading="lazy"><div class="gal-bg gg8" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Indie Picks</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/movie-night/04-audience.jpg" alt="The Audience" loading="lazy"><div class="gal-bg gg4" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">The Audience</div></div></div></div>
+        <div class="gal-photo"><div class="gal-photo-inner"><img class="gal-img" src="gallery/movie-night/05-late-night.jpg" alt="Late Night Feels" loading="lazy"><div class="gal-bg gg6" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Late Night Feels</div></div></div></div>
       </div>
     </div>
-
-   
+    -->  
     <div class="gal-event-block rv" style="transition-delay:.3s">
       <div class="gal-event-header">
         <div class="gal-event-label" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">🎨</div>
         <div class="gal-event-title">Art Jams & Comedy</div>
       </div>
       <div class="gal-scroll">
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg6"></div><div class="gal-ov"><div class="gal-lbl">Paint Session</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg1"></div><div class="gal-ov"><div class="gal-lbl">Laughs &amp; Lines</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg7"></div><div class="gal-ov"><div class="gal-lbl">Canvas Stories</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg2"></div><div class="gal-ov"><div class="gal-lbl">The Stage Roars</div></div></div></div>
-        <div class="gal-photo"><div class="gal-photo-inner"><div class="gal-bg gg5"></div><div class="gal-ov"><div class="gal-lbl">Colour Chaos</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><video class="gal-vid" poster="https://drive.google.com/thumbnail?id=1tIKDY5iSvSabLnEAiBiGegyxWKOmhEUM&sz=w1920" muted loop playsinline preload="metadata"><source src="https://drive.google.com/uc?export=download&id=1tIKDY5iSvSabLnEAiBiGegyxWKOmhEUM" type="video/mp4"></video><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg6" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Paint Session</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><iframe class="gal-vid" src="https://drive.google.com/file/d/1K19FfcrmVCQC3QzaKAeH8ZqYPkaB94cZ/preview" allow="autoplay" loading="lazy" title="Laughs & Lines"></iframe><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg1" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Laughs &amp; Lines</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><iframe class="gal-vid" src="https://drive.google.com/file/d/1xJYcitigLdKI13RJ_YrgX96Q0W0XhiV3/preview" allow="autoplay" loading="lazy" title="Canvas Stories"></iframe><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg7" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Canvas Stories</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><iframe class="gal-vid" src="https://drive.google.com/file/d/1nSK3S4gHVi_lxMdVXRH8JTszkhCbrR01/preview" allow="autoplay" loading="lazy" title="The Stage Roars"></iframe><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg2" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">The Stage Roars</div></div></div></div>
+        <div class="gal-photo gal-photo--video"><div class="gal-photo-inner"><iframe class="gal-vid" src="https://drive.google.com/file/d/1fHHWpyfV5HIxmbh0Xug596AIbNXL5Kax/preview" allow="autoplay" loading="lazy" title="Colour Chaos"></iframe><span class="gal-vid-badge" aria-hidden="true">▶</span><div class="gal-bg gg5" aria-hidden="true"></div><div class="gal-ov"><div class="gal-lbl">Colour Chaos</div></div></div></div>
       </div>
     </div>
-  
+
   </div>
 </section>
--->
 <!-- ABOUT -->
 <section class="s-bg" id="about">
   <div class="about-grid">
@@ -744,14 +741,14 @@ footer{background:var(--ink);color:#fdf8f5;padding:3.5rem 5vw 2rem;}
     <div class="ft-col">
       <h4>Connect</h4>
       <a href="https://wa.me/918483955680" target="_blank">WhatsApp</a>
-      <a href="#">Instagram</a>
+      <a href="https://www.instagram.com/p/DYbhSZXDLc6/" target="_blank" rel="noopener noreferrer">Instagram</a>
       <a href="#">Facebook</a>
     </div>
   </div>
   <div class="ft-btm">
     <p>© 2026 MaCaBo · Mumbai · Make CHaOS BOotiful ✿</p>
     <div class="ft-soc">
-      <a href="#" title="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="https://www.instagram.com/p/DYbhSZXDLc6/" target="_blank" rel="noopener noreferrer" title="MaCaBo on Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
       <a href="https://wa.me/918483955680" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
     </div>
   </div>
@@ -769,6 +766,40 @@ if(cur&&curt){
     el.addEventListener('mouseleave',()=>{cur.classList.remove('big');curt.classList.remove('big');});
   });
 }
+
+/* ── GALLERY — images + Drive videos ── */
+function driveIdFromSrc(src){
+  const m=String(src||'').match(/[?&]id=([a-zA-Z0-9_-]+)/)||String(src||'').match(/\/d\/([a-zA-Z0-9_-]+)/);
+  return m?m[1]:null;
+}
+document.querySelectorAll('.gal-img').forEach(img=>{
+  if(/drive\.google\.com\/file\//.test(img.src)){
+    const id=driveIdFromSrc(img.src);
+    if(id) img.src='https://drive.google.com/thumbnail?id='+id+'&sz=w1920';
+  }
+  img.addEventListener('error',()=>{ img.style.display='none'; });
+});
+document.querySelectorAll('.gal-vid').forEach(vid=>{
+  const card=vid.closest('.gal-photo');
+  const tryPlay=()=>vid.play().catch(()=>{});
+  const tryPause=()=>{ vid.pause(); try{vid.currentTime=0;}catch(e){} };
+  if(card){
+    card.addEventListener('mouseenter',tryPlay);
+    card.addEventListener('mouseleave',tryPause);
+  }
+  vid.addEventListener('error',()=>{
+    const id=driveIdFromSrc(vid.querySelector('source')?.src||'');
+    if(!id||vid.dataset.fallback)return;
+    vid.dataset.fallback='1';
+    const iframe=document.createElement('iframe');
+    iframe.className='gal-vid';
+    iframe.src='https://drive.google.com/file/d/'+id+'/preview';
+    iframe.setAttribute('allow','autoplay');
+    iframe.setAttribute('loading','lazy');
+    iframe.setAttribute('title',card?.querySelector('.gal-lbl')?.textContent||'Gallery video');
+    vid.replaceWith(iframe);
+  });
+});
 
 /* ── PAINT CANVAS — animated blob splats appear on hero load ── */
 (function buildPaint(){
@@ -921,6 +952,91 @@ window.addEventListener('scroll',()=>{
   if(bl)bl.style.transform=`translateY(${-y*.07}px)`;
   if(br)br.style.transform=`translateY(${-y*.08}px)`;
 },{passive:true});
+
+/* ── AUTO SUNDAY DATE + BOOKING STATE ── */
+(function initEventCard() {
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  function getTargetSunday() {
+    const d   = new Date();
+    const dow = d.getDay();     // 0 = Sunday
+    const h   = d.getHours();
+    const m   = d.getMinutes();
+
+    let offset;
+    if (dow === 0) {
+      // Sunday after 8:00 PM → jump to next Sunday
+      offset = (h > 20 || (h === 20 && m >= 0)) ? 7 : 0;
+    } else {
+      offset = 7 - dow;         // days until next Sunday
+    }
+
+    const target = new Date(d);
+    target.setDate(d.getDate() + offset);
+    return target;
+  }
+
+  function isBookingClosed() {
+    const d = new Date();
+    // Sunday 6:15 PM or later
+    return d.getDay() === 0 &&
+           (d.getHours() > 18 || (d.getHours() === 18 && d.getMinutes() >= 15));
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function renderCard() {
+    const dateEl   = document.getElementById('evDate');
+    const btnEl    = document.getElementById('evBookBtn');
+    const hotEl    = document.getElementById('evHot');
+    if (!dateEl || !btnEl) return;
+
+    const sun   = getTargetSunday();
+    const day   = sun.getDate();
+    const month = MONTHS[sun.getMonth()];
+    const year  = sun.getFullYear();
+    const dow   = DAYS[sun.getDay()]; // always Sunday
+
+    // Format: 📅 May 25 (Sunday), 2026 · 6:00 to 8:00 PM
+    dateEl.textContent = `📅 ${month} ${day} (${dow}), ${year} · 6:00 to 8:00 PM`;
+
+    // Update modal data attrs so it picks up correct date
+    if (btnEl.closest) {
+      const card = btnEl.closest('.ev-card');
+      if (card) card.dataset.eventDate = `${month} ${day}, ${year}`;
+    }
+
+    const closed = isBookingClosed();
+
+    if (closed) {
+      btnEl.textContent  = '🚫 Booking Closed';
+      btnEl.disabled     = true;
+      btnEl.style.cssText = 'background:rgba(0,0,0,.18);cursor:not-allowed;box-shadow:none;filter:grayscale(1);';
+      if (hotEl) { hotEl.textContent = '✅ Tonight!'; hotEl.style.background = 'linear-gradient(135deg,#4aada8,#3aaa6e)'; }
+    } else {
+      btnEl.textContent = 'Reserve Now';
+      btnEl.disabled    = false;
+      btnEl.style.cssText = '';
+      if (hotEl) { hotEl.textContent = '🔥 Almost Full'; hotEl.style.background = ''; }
+    }
+  }
+
+  renderCard();
+
+  // Re-check every minute so the 6:15PM cutoff triggers live
+  setInterval(renderCard, 60 * 1000);
+
+  // Also wire up the book button for the modal (replaces old querySelectorAll listener for this card)
+  document.getElementById('evBookBtn')?.addEventListener('click', function() {
+    if (this.disabled) return;
+    const sun   = getTargetSunday();
+    const day   = sun.getDate();
+    const month = MONTHS[sun.getMonth()];
+    const year  = sun.getFullYear();
+    oModal('The Chaotic Sunday', `${month} ${day}, ${year}`);
+  });
+})();
 </script>
 </body>
 </html>
