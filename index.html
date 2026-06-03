@@ -939,14 +939,12 @@ window.addEventListener('scroll',()=>{
   renderCard();
   setInterval(renderCard, 60 * 1000);
 
-  document.getElementById('evBookBtn')?.addEventListener('click', function() {
-    if (this.disabled) return;
-    const sun   = getTargetSunday();
-    const day   = sun.getDate();
-    const month = MONTHS[sun.getMonth()];
-    const year  = sun.getFullYear();
-    oModal('The Chaotic Sunday', `${month} ${day}, ${year}`);
-  });
+  document.getElementById('evBookBtn')?.addEventListener('click', function(e) {
+    if (this.disabled) {
+        e.preventDefault();
+        return;
+    }
+});
 })();
 
 window.oModal=oModal;
